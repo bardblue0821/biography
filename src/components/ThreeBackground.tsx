@@ -146,6 +146,24 @@ const ThreeBackground = () => {
       ballLight.position.set(10, -20 + 10, 10); // 右上から照らす
       scene.add(ballLight);
 
+      // ボールの速度ベクトル
+      let ballVelocity = new THREE.Vector3(0, 0, 0);
+      // 浮遊アニメーションの基準点
+      let floatBase = new THREE.Vector3(0, -20 + 4 * (1/3), 0);
+      // Gキーでボールを横に叩く
+      function onKeyDown(event: KeyboardEvent) {
+        if (event.key === 'g' || event.key === 'G') {
+          const speed = 0.7 + Math.random() * 0.7;
+          const angle = Math.random() * Math.PI * 2;
+          ballVelocity.set(
+            Math.cos(angle) * speed,
+            0,
+            Math.sin(angle) * speed
+          );
+        }
+      }
+      window.addEventListener('keydown', onKeyDown);
+
       let frameId: number;
       let startTime = performance.now();
       function renderLoop() {
@@ -153,8 +171,29 @@ const ThreeBackground = () => {
         const elapsed = (now - startTime) / 1000;
         water.material.uniforms['time'].value += 1.0 / 60.0;
         if (beachball) {
-          beachball.position.y = -20 + 4 * (1/3) + Math.sin(elapsed * 1.2)/3;
-          beachball.position.x = Math.sin(elapsed * 0.7)/2 + Math.sin(elapsed * 1.2)/2;
+          // 速度があれば移動（摩擦で減速）
+          if (ballVelocity.lengthSq() > 0.0001) {
+            beachball.position.add(ballVelocity);
+            // 摩擦
+            ballVelocity.multiplyScalar(0.90);
+            // 水面より下に落ちない
+            if (beachball.position.y < -20 + 4 * (1/3)) {
+              beachball.position.y = -20 + 4 * (1/3);
+            }
+            // 移動が止まったら、その位置から揺れ成分を除いた値を新たな基準点に
+            if (ballVelocity.lengthSq() <= 0.0001) {
+              floatBase.set(
+                beachball.position.x - (Math.sin(elapsed * 0.7)/4 + Math.sin(elapsed * 1.2)/4),
+                beachball.position.y - Math.sin(elapsed * 1.2)/6,
+                beachball.position.z
+              );
+            }
+          } else {
+            // 浮遊アニメーション（基準点を中心に揺らす）
+            beachball.position.y = floatBase.y + Math.sin(elapsed * 1.2)/6;
+            beachball.position.x = floatBase.x + Math.sin(elapsed * 0.7)/4 + Math.sin(elapsed * 1.2)/4;
+            beachball.position.z = floatBase.z;
+          }
           // ゆらゆらとランダムに回転
           beachball.rotation.x = Math.sin(elapsed * 0.5) * 0.2 + Math.sin(elapsed * 1.1) * 0.1;
           beachball.rotation.y = Math.sin(elapsed * 0.7) * 0.3 + Math.cos(elapsed * 0.9) * 0.15;
@@ -184,6 +223,7 @@ const ThreeBackground = () => {
 
       // クリーンアップ
       return () => {
+        window.removeEventListener('keydown', onKeyDown);
         cancelAnimationFrame(frameId);
         window.removeEventListener('resize', resizeRenderer);
         mount!.removeChild(renderer.domElement);
