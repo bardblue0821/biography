@@ -77,10 +77,19 @@ const ThreeBackground = () => {
       // FBXLoaderでbeachball2.fbxを読み込む
       let beachball: THREE.Object3D | null = null;
       const fbxLoader = new FBXLoader();
+      // 浮遊アニメーションの基準点
+      let floatBase: THREE.Vector3 | null = null;
       fbxLoader.load('/biography/beachball2.FBX', (object) => {
         beachball = object;
-        beachball.position.set(0, -20 + 4 * (1/3), 0);
+        // 初期位置を右上に調整
+        const initialX = 10;
+        const initialY = -16;
+        const initialZ = 0;
+        beachball.position.set(initialX, initialY, initialZ);
         beachball.scale.set(0.1, 0.1, 0.1);
+        // floatBaseも同じ初期値で初期化
+        floatBase = new THREE.Vector3(initialX, initialY, initialZ);
+
         const textureLoader = new THREE.TextureLoader();
         const baseColor = textureLoader.load('/biography/beachball2/Maps/PBR_Metalrough/Myach_DefaultMaterial_BaseColor.png');
         // const normalMap = textureLoader.load('/biography/beachball2/Maps/PBR_Metalrough/Myach_DefaultMaterial_Normal.png');
@@ -148,8 +157,6 @@ const ThreeBackground = () => {
 
       // ボールの速度ベクトル
       let ballVelocity = new THREE.Vector3(0, 0, 0);
-      // 浮遊アニメーションの基準点
-      let floatBase = new THREE.Vector3(0, -20 + 4 * (1/3), 0);
       // Gキーでボールを横に叩く
       function onKeyDown(event: KeyboardEvent) {
         if (event.key === 'g' || event.key === 'G') {
@@ -181,14 +188,14 @@ const ThreeBackground = () => {
               beachball.position.y = -20 + 4 * (1/3);
             }
             // 移動が止まったら、その位置から揺れ成分を除いた値を新たな基準点に
-            if (ballVelocity.lengthSq() <= 0.0001) {
+            if (ballVelocity.lengthSq() <= 0.0001 && floatBase) {
               floatBase.set(
                 beachball.position.x - (Math.sin(elapsed * 0.7)/4 + Math.sin(elapsed * 1.2)/4),
                 beachball.position.y - Math.sin(elapsed * 1.2)/6,
                 beachball.position.z
               );
             }
-          } else {
+          } else if (floatBase) {
             // 浮遊アニメーション（基準点を中心に揺らす）
             beachball.position.y = floatBase.y + Math.sin(elapsed * 1.2)/6;
             beachball.position.x = floatBase.x + Math.sin(elapsed * 0.7)/4 + Math.sin(elapsed * 1.2)/4;
