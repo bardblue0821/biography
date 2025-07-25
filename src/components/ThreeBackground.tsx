@@ -107,6 +107,11 @@ const ThreeBackground = () => {
       spotLight.castShadow = true;
       water.receiveShadow = true;
 
+      // ボール専用ライト
+      const ballLight = new THREE.PointLight(0xffffff, 2.5, 30); // 強めの白色ライト
+      ballLight.position.set(0, -20 + 6, 0); // 初期位置はボールの真上
+      scene.add(ballLight);
+
       let frameId: number;
       let startTime = performance.now();
       function renderLoop() {
@@ -114,8 +119,11 @@ const ThreeBackground = () => {
         const elapsed = (now - startTime) / 1000;
         water.material.uniforms['time'].value += 1.0 / 60.0;
         if (beachball) {
-          beachball.position.y = -20 + 4 * (1/3) + Math.sin(elapsed * 1.2);
-          beachball.position.x = Math.sin(elapsed * 0.7)/2 + Math.sin(elapsed * 1.2)/2;
+          beachball.position.y = -20 + 4 * (1/3) + Math.sin(elapsed * 1.2)/3;
+          beachball.position.x = 20 + Math.sin(elapsed * 0.7)/2 + Math.sin(elapsed * 1.2)/2;
+          ballLight.position.x = beachball.position.x;
+          ballLight.position.z = beachball.position.z;
+          ballLight.position.y = beachball.position.y + 2.5; // ボールの少し上
         }
         renderer.render(scene, camera);
         frameId = requestAnimationFrame(renderLoop);

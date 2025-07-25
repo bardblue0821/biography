@@ -5,9 +5,9 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-tealLight relative overflow-hidden">
       <ThreeBackground />
-      <div className="w-full max-w-5xl flex flex-col md:flex-row shadow-lg rounded-lg overflow-hidden bg-white relative z-10">
+      <div className="w-full max-w-5xl flex flex-col md:flex-row shadow-lg rounded-lg overflow-hidden bg-white/0 relative z-10">
         {/* 左側：自己紹介 */}
-        <section className="md:w-1/2 w-full p-8 bg-tealMid flex flex-col justify-center items-center">
+        <section className="md:w-1/2 w-full p-8 bg-tealMid/0 flex flex-col justify-center items-center">
           <div className="w-24 h-24 rounded-full bg-teal flex items-center justify-center mb-4">
             {/* アバターのダミー */}
             <span className="text-3xl text-white">👤</span>
@@ -26,7 +26,7 @@ function App() {
           </div>
         </section>
         {/* 右側：ポートフォリオ */}
-        <section className="md:w-1/2 w-full p-8 bg-tealLight overflow-y-auto">
+        <section className="md:w-1/2 w-full p-8 bg-tealLight/0 overflow-y-auto">
           <h2 className="text-2xl font-bold mb-4">ポートフォリオ</h2>
           <div className="space-y-4">
             {/* ダミープロジェクト */}
