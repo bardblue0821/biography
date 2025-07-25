@@ -19,8 +19,8 @@ const ThreeBackground = () => {
       const scene = new THREE.Scene();
 
       // カメラ
-      const camera = new THREE.PerspectiveCamera(20, width / height, 0.1, 10000);
-      camera.position.set(-30, 80, 200);
+      const camera = new THREE.PerspectiveCamera(30, width / height, 0.1, 10000);
+      camera.position.set(-10, 30, 30);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
       scene.add(camera);
 
@@ -52,12 +52,12 @@ const ThreeBackground = () => {
       scene.add(sky);
 
       // 水面
-      const waterGeometry = new THREE.PlaneGeometry(1000, 1000, 1, 1);
+      const waterGeometry = new THREE.PlaneGeometry(200, 200, 1, 1);
       const water = new Water(waterGeometry, {
-        textureWidth: 512,
-        textureHeight: 512,
+        textureWidth: 64,
+        textureHeight: 64,
         waterNormals: new THREE.TextureLoader().load(
-          '/water_n.jpg',
+          '/biography/water_n.jpg',
           (texture) => {
             texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
           }
@@ -75,15 +75,26 @@ const ThreeBackground = () => {
 
       let frameId: number;
       function renderLoop() {
-        water.material.uniforms['time'].value += 1.0 / 20.0;
+        water.material.uniforms['time'].value += 1.0 / 60.0;
         renderer.render(scene, camera);
         frameId = requestAnimationFrame(renderLoop);
       }
       renderLoop();
 
+      function resizeRenderer() {
+        const width = mount!.clientWidth;
+        const height = mount!.clientHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+      window.addEventListener('resize', resizeRenderer);
+      resizeRenderer();
+
       // クリーンアップ
       return () => {
         cancelAnimationFrame(frameId);
+        window.removeEventListener('resize', resizeRenderer);
         mount!.removeChild(renderer.domElement);
         renderer.dispose();
       };
