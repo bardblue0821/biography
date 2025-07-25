@@ -155,6 +155,10 @@ const ThreeBackground = () => {
         if (beachball) {
           beachball.position.y = -20 + 4 * (1/3) + Math.sin(elapsed * 1.2)/3;
           beachball.position.x = Math.sin(elapsed * 0.7)/2 + Math.sin(elapsed * 1.2)/2;
+          // ゆらゆらとランダムに回転
+          beachball.rotation.x = Math.sin(elapsed * 0.5) * 0.2 + Math.sin(elapsed * 1.1) * 0.1;
+          beachball.rotation.y = Math.sin(elapsed * 0.7) * 0.3 + Math.cos(elapsed * 0.9) * 0.15;
+          beachball.rotation.z = Math.cos(elapsed * 0.4) * 0.2 + Math.sin(elapsed * 0.8) * 0.1;
           // シェーダーのカメラ・時間を更新
           beachball.traverse((child) => {
             if ((child as THREE.Mesh).isMesh && (child as THREE.Mesh).material instanceof THREE.ShaderMaterial) {
