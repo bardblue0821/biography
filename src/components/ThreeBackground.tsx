@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { Sky } from 'three/examples/jsm/objects/Sky.js';
+import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js';
 
 const ThreeBackground = () => {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -31,7 +32,7 @@ const ThreeBackground = () => {
       mount!.appendChild(renderer.domElement);
 
       // 環境光
-      const ambient = new THREE.AmbientLight(0xffffff, 0.4);
+      const ambient = new THREE.AmbientLight(0xffffff, 1.0);
       scene.add(ambient);
 
       // スポットライト
@@ -54,8 +55,8 @@ const ThreeBackground = () => {
       // 水面
       const waterGeometry = new THREE.PlaneGeometry(200, 200, 1, 1);
       const water = new Water(waterGeometry, {
-        textureWidth: 64,
-        textureHeight: 64,
+        textureWidth: 16,
+        textureHeight: 16,
         waterNormals: new THREE.TextureLoader().load(
           '/biography/water_n.jpg',
           (texture) => {
@@ -73,15 +74,35 @@ const ThreeBackground = () => {
       water.material.uniforms.sunDirection.value.copy(sky.material.uniforms.sunPosition.value).normalize();
       scene.add(water);
 
-      // ボールを水面に浮かべる
-      const ballGeometry = new THREE.SphereGeometry(3, 32, 32);
-      const ballMaterial = new THREE.MeshStandardMaterial({ color: 0xffaa00 });
-      const ball = new THREE.Mesh(ballGeometry, ballMaterial);
-      // 球の下3分の1が水面につかるようにy座標を調整
-      ball.position.set(0, -20 + 4 * (1/3), 0);
-      ball.castShadow = true;
-      ball.receiveShadow = true;
-      scene.add(ball);
+      // FBXLoaderでbeachball2.fbxを読み込む
+      let beachball: THREE.Object3D | null = null;
+      const fbxLoader = new FBXLoader();
+      fbxLoader.load('/biography/beachball2.FBX', (object) => {
+        beachball = object;
+        beachball.position.set(0, -20 + 4 * (1/3), 0);
+        beachball.scale.set(0.1, 0.1, 0.1);
+        const textureLoader = new THREE.TextureLoader();
+        const baseColor = textureLoader.load('/biography/beachball2/Maps/PBR_Metalrough/Myach_DefaultMaterial_BaseColor.png');
+        const normalMap = textureLoader.load('/biography/beachball2/Maps/PBR_Metalrough/Myach_DefaultMaterial_Normal.png');
+        const metallicMap = textureLoader.load('/biography/beachball2/Maps/PBR_Metalrough/Myach_DefaultMaterial_Metallic.png');
+        const roughnessMap = textureLoader.load('/biography/beachball2/Maps/PBR_Metalrough/Myach_DefaultMaterial_Roughness.png');
+        
+        beachball.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            (child as THREE.Mesh).castShadow = true;
+            (child as THREE.Mesh).receiveShadow = true;
+            (child as THREE.Mesh).material = new THREE.MeshStandardMaterial({
+              map: baseColor,
+              normalMap: normalMap,
+              metalnessMap: metallicMap,
+              roughnessMap: roughnessMap,
+              metalness: 1.0,
+              roughness: 0.1,
+            });
+          }
+        });
+        scene.add(beachball!);
+      });
       renderer.shadowMap.enabled = true;
       spotLight.castShadow = true;
       water.receiveShadow = true;
@@ -92,9 +113,10 @@ const ThreeBackground = () => {
         const now = performance.now();
         const elapsed = (now - startTime) / 1000;
         water.material.uniforms['time'].value += 1.0 / 60.0;
-        // ぷかぷかアニメーション
-        ball.position.y = -20 + 4 * (1/3) + Math.sin(elapsed * 1.2) * 2;
-        ball.position.x = Math.sin(elapsed * 0.7)/2 + Math.sin(elapsed * 1.2)/2;
+        if (beachball) {
+          beachball.position.y = -20 + 4 * (1/3) + Math.sin(elapsed * 1.2);
+          beachball.position.x = Math.sin(elapsed * 0.7)/2 + Math.sin(elapsed * 1.2)/2;
+        }
         renderer.render(scene, camera);
         frameId = requestAnimationFrame(renderLoop);
       }
