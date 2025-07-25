@@ -73,9 +73,28 @@ const ThreeBackground = () => {
       water.material.uniforms.sunDirection.value.copy(sky.material.uniforms.sunPosition.value).normalize();
       scene.add(water);
 
+      // ボールを水面に浮かべる
+      const ballGeometry = new THREE.SphereGeometry(3, 32, 32);
+      const ballMaterial = new THREE.MeshStandardMaterial({ color: 0xffaa00 });
+      const ball = new THREE.Mesh(ballGeometry, ballMaterial);
+      // 球の下3分の1が水面につかるようにy座標を調整
+      ball.position.set(0, -20 + 4 * (1/3), 0);
+      ball.castShadow = true;
+      ball.receiveShadow = true;
+      scene.add(ball);
+      renderer.shadowMap.enabled = true;
+      spotLight.castShadow = true;
+      water.receiveShadow = true;
+
       let frameId: number;
+      let startTime = performance.now();
       function renderLoop() {
+        const now = performance.now();
+        const elapsed = (now - startTime) / 1000;
         water.material.uniforms['time'].value += 1.0 / 60.0;
+        // ぷかぷかアニメーション
+        ball.position.y = -20 + 4 * (1/3) + Math.sin(elapsed * 1.2) * 2;
+        ball.position.x = Math.sin(elapsed * 0.7)/2 + Math.sin(elapsed * 1.2)/2;
         renderer.render(scene, camera);
         frameId = requestAnimationFrame(renderLoop);
       }
