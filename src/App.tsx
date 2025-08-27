@@ -1,6 +1,8 @@
 
 import React, { useState, useCallback } from 'react';
-import bgImage from '/src/assets/wolca_newspaper.jpg';
+import BackgroundImage from './components/BackgroundImage';
+import IconArea from './components/IconArea';
+import PhotoSlider from './components/PhotoSlider';
 import iconImage from '/src/assets/icon.jpg';
 import photo1 from '/src/assets/4c8C0BKg.jpg';
 import photo2 from '/src/assets/VRChat_2023-10-04_23-15-08.604_1920x1080.png';
@@ -32,39 +34,33 @@ function App() {
     photo7,
   ];
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [fade, setFade] = useState<'none' | 'out-left' | 'in-left' | 'out-right' | 'in-right'>('none');
+  const [fade, setFade] = useState<'inTransition' | 'out-left' | 'in-left' | 'out-right' | 'in-right'>('inTransition');
   const [nextIndex, setNextIndex] = useState<number | null>(null);
 
   // ホイールイベントで写真切り替え
-  const showPhoto = useCallback((direction: 'next' | 'prev') => {
-    if (fade !== 'none') return;
-    let next: number;
-    if (direction === 'next') {
-      setFade('out-left');
+    const showPhoto = useCallback((direction: 'next' | 'prev') => {
+      if (fade !== 'inTransition') return;
+      const isNext = direction === 'next';
+      const outFade = isNext ? 'out-right' : 'out-left';
+      const inFade = isNext ? 'in-right' : 'in-left';
+      const next = isNext
+        ? (photoIndex + 1) % photos.length
+        : (photoIndex - 1 + photos.length) % photos.length;
+
+      setFade(outFade);
       setTimeout(() => {
-        next = (photoIndex + 1) % photos.length;
         setNextIndex(next);
-        setFade('in-right');
+        setFade(inFade);
         setTimeout(() => {
           setPhotoIndex(next);
           setNextIndex(null);
-          setFade('none');
+          setFade('inTransition');
         });
       }, 300);
-    } else {
-      setFade('out-right');
-      setTimeout(() => {
-        next = (photoIndex - 1 + photos.length) % photos.length;
-        setNextIndex(next);
-        setFade('in-left');
-        setTimeout(() => {
-          setPhotoIndex(next);
-          setNextIndex(null);
-          setFade('none');
-        });
-      }, 300);
-    }
-  }, [fade, photoIndex, photos.length]);
+    }, [fade, photoIndex, photos.length]);
+
+  const handlePrev = useCallback(() => showPhoto('prev'), [showPhoto]);
+  const handleNext = useCallback(() => showPhoto('next'), [showPhoto]);
 
   const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
     if (e.deltaY > 0) {
@@ -81,51 +77,19 @@ function App() {
         <span className="welcome-text text-white text-5xl font-bold tracking-wide">Welcome</span>
       </div>
 
-      {/* 背景画像 */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <img
-          src={bgImage}
-          alt="背景"
-          className="w-full h-full object-cover brightness-50"
-        />
-
-        {/* 右側に写真表示 */}
-        <div
-          className="absolute right-8 top-1/2 -translate-y-1/2 flex items-center justify-center bg-white/70 rounded-xl shadow-xl border-2 border-white overflow-hidden max-w-[90vw] w-[60vw] h-[70vh] z-10"
-          onWheel={handleWheel}
-        >
-          <div className="relative w-full h-full">
-            {/* 現在の写真（フェードイン中は非表示） */}
-            {(fade === 'none' || fade.startsWith('out')) && (
-              <img
-                src={photos[photoIndex]}
-                alt={`写真${photoIndex + 1}`}
-                className={`object-cover w-full h-full absolute top-0 left-0 transition-all duration-300
-                  ${fade === 'out-left' ? 'opacity-0 -translate-x-10' : ''}
-                  ${fade === 'out-right' ? 'opacity-0 translate-x-10' : ''}
-                  ${fade === 'none' ? 'opacity-100 translate-x-0' : ''}`}
-                style={{ zIndex: 2 }}
-              />
-            )}
-            {/* 次の写真（フェードイン用） */}
-            {(fade === 'in-right' || fade === 'in-left') && nextIndex !== null && (
-              <img
-                src={photos[nextIndex]}
-                alt={`写真${nextIndex + 1}`}
-                className={`object-cover w-full h-full absolute top-0 left-0 transition-all duration-300 opacity-100
-                  ${fade === 'in-right' ? 'translate-x-10' : ''}
-                  ${fade === 'in-left' ? '-translate-x-10' : ''}`}
-                style={{ zIndex: 3 }}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* アイコン */}
-        <img
-          src={iconImage}
-          alt="アイコン"
-          className="absolute left-8 top-1/2 -translate-y-1/2 w-64 h-64 object-cover rounded-full border-4 border-white shadow-lg"
+      {/* 画面分割レイアウト */}
+      <section className="relative h-screen w-full overflow-hidden flex">
+        <BackgroundImage />
+        <IconArea src={iconImage} />
+        <PhotoSlider
+          photos={photos}
+          photoIndex={photoIndex}
+          fade={fade}
+          nextIndex={nextIndex}
+          handleWheel={handleWheel}
+          onPrev={handlePrev}
+          onNext={handleNext}
+          disabled={fade !== 'inTransition'}
         />
       </section>
     </main>
