@@ -32,24 +32,47 @@ function App() {
     photo7,
   ];
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [fade, setFade] = useState(false);
+  const [fade, setFade] = useState<'none' | 'out-left' | 'in-left' | 'out-right' | 'in-right'>('none');
+  const [nextIndex, setNextIndex] = useState<number | null>(null);
 
   // ホイールイベントで写真切り替え
+  const showPhoto = useCallback((direction: 'next' | 'prev') => {
+    if (fade !== 'none') return;
+    let next: number;
+    if (direction === 'next') {
+      setFade('out-left');
+      setTimeout(() => {
+        next = (photoIndex + 1) % photos.length;
+        setNextIndex(next);
+        setFade('in-right');
+        setTimeout(() => {
+          setPhotoIndex(next);
+          setNextIndex(null);
+          setFade('none');
+        });
+      }, 300);
+    } else {
+      setFade('out-right');
+      setTimeout(() => {
+        next = (photoIndex - 1 + photos.length) % photos.length;
+        setNextIndex(next);
+        setFade('in-left');
+        setTimeout(() => {
+          setPhotoIndex(next);
+          setNextIndex(null);
+          setFade('none');
+        });
+      }, 300);
+    }
+  }, [fade, photoIndex, photos.length]);
+
   const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
-    if (fade) return; // フェード中は無視
-    setFade(true);
-    setTimeout(() => {
-      setFade(false);
-      setPhotoIndex(i => {
-        if (e.deltaY > 0) {
-          return (i + 1) % photos.length;
-        } else if (e.deltaY < 0) {
-          return (i - 1 + photos.length) % photos.length;
-        }
-        return i;
-      });
-    }, 300);
-  }, [fade, photos.length]);
+    if (e.deltaY > 0) {
+      showPhoto('next');
+    } else if (e.deltaY < 0) {
+      showPhoto('prev');
+    }
+  }, [showPhoto]);
 
   return (
     <main className="fade-in relative">
@@ -72,14 +95,29 @@ function App() {
           onWheel={handleWheel}
         >
           <div className="relative w-full h-full">
-            <img
-              src={photos[photoIndex]}
-              alt={`写真${photoIndex + 1}`}
-              className={`object-cover w-full h-full transition-opacity duration-300 ${fade ? 'opacity-0' : 'opacity-100'}`}
-            />
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 text-white px-6 py-2 rounded-lg text-xl font-semibold pointer-events-none">
-              写真{photoIndex + 1}の説明テキスト
-            </div>
+            {/* 現在の写真（フェードイン中は非表示） */}
+            {(fade === 'none' || fade.startsWith('out')) && (
+              <img
+                src={photos[photoIndex]}
+                alt={`写真${photoIndex + 1}`}
+                className={`object-cover w-full h-full absolute top-0 left-0 transition-all duration-300
+                  ${fade === 'out-left' ? 'opacity-0 -translate-x-10' : ''}
+                  ${fade === 'out-right' ? 'opacity-0 translate-x-10' : ''}
+                  ${fade === 'none' ? 'opacity-100 translate-x-0' : ''}`}
+                style={{ zIndex: 2 }}
+              />
+            )}
+            {/* 次の写真（フェードイン用） */}
+            {(fade === 'in-right' || fade === 'in-left') && nextIndex !== null && (
+              <img
+                src={photos[nextIndex]}
+                alt={`写真${nextIndex + 1}`}
+                className={`object-cover w-full h-full absolute top-0 left-0 transition-all duration-300 opacity-100
+                  ${fade === 'in-right' ? 'translate-x-10' : ''}
+                  ${fade === 'in-left' ? '-translate-x-10' : ''}`}
+                style={{ zIndex: 3 }}
+              />
+            )}
           </div>
         </div>
 
