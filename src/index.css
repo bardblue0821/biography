@@ -1,10 +1,29 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,734;1,734&display=swap');
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  color-scheme: light dark;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+.fade-in {
+  position: relative;
+}
+
+.fade-black {
+  background: #000;
+  opacity: 1;
+  transition: opacity 0.8s ease 1s;
+  z-index: 50;
+}
+
+.fade-in.loaded .fade-black {
+  opacity: 0;
+}
+
+.welcome-text {
+  opacity: 1;
+  transition: opacity 0.8s ease 2s;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.08em;
+}
+
+.fade-in.loaded .welcome-text {
+  opacity: 0;
 }
