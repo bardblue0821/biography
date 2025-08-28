@@ -1,5 +1,5 @@
 // ウィンドウに重ねて表示する文字用の子コンポーネント
-import React from 'react';
+import React, { useState } from 'react';
 import photo1 from '../assets/4c8C0BKg.jpg';
 import photo2 from '../assets/VRChat_2023-10-04_23-15-08.604_1920x1080.png';
 import photo3 from '../assets/VRChat_2024-01-15_15-25-12.422_3840x2160.png';
@@ -26,81 +26,93 @@ const OverlayText: React.FC<{ text: string, index: number }> = ({ text, index })
 
 const photos = [photo1, photo2, photo3];
 
+
 const PhotoSlider: React.FC = () => {
+  const [current, setCurrent] = useState(0);
+
+  // 写真とテキストのリスト
+  const photoData = [
+    { src: photos[0], text: 'Biography', index: 1 },
+    { src: photos[1], text: 'Dokoiku VR', index: 2 },
+    { src: photos[2], text: 'VRChat', index: 3 },
+  ];
+
+  // クリックで次の写真へ
+  const handleClick = () => {
+    setCurrent((prev) => (prev + 1) % photoData.length);
+  };
+
+  // 前後のインデックス計算（ループ）
+  const prevIdx = (current - 1 + photoData.length) % photoData.length;
+  const nextIdx = (current + 1) % photoData.length;
+
   return (
-    <>
-  <div className="h-full w-full flex flex-col items-center justify-center relative">
-        <div className="">
-          {/* 写真1 */}
-          <img
-            src={photos[0]}
-            alt="photo1"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              top: '-25%',
-              width: '90%',
-              aspectRatio: '3/2',
-              objectFit: 'cover',
-              borderRadius: '0.5rem',
-              paddingLeft: '2rem',
-              paddingRight: '2rem',
-              filter:
-                'brightness(0.75) grayscale(1) saturate(3)',
-              transition: 'transform 0.5s',
-              zIndex: 10,
-            }}
-            onMouseOver={e => {
-              e.currentTarget.style.transform = 'translateX(-50%) scale(1.03)';
-            }}
-            onMouseOut={e => {
-              e.currentTarget.style.transform = 'translateX(-50%)';
-            }}
-          />
-        </div>
-        <div
-          style={{ position: 'relative', width: '100%', height: '0', paddingTop: '66.6667%', transition: 'transform 0.5s', zIndex: 20 }}
-          onMouseOver={e => {
-            const div = e.currentTarget as HTMLDivElement;
-            div.style.transform = 'scale(1.03)';
-            const img = div.querySelector('img');
-            if (img) img.style.filter = 'grayscale(0) saturate(1)';
+    <div
+      className="h-full w-full flex flex-col items-center justify-center relative cursor-pointer"
+      onClick={handleClick}
+      style={{ userSelect: 'none', minHeight: '500px' }}
+      title="クリックで次の写真へ"
+    >
+      {/* 前の写真（上、中央に少し重なる） */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translateX(-50%) translateY(-100%) scale(0.7)',
+          width: '100%',
+          aspectRatio: '3/2',
+          opacity: 0.5,
+          filter: 'blur(2px) grayscale(0.7)',
+          zIndex: 5,
+          pointerEvents: 'none',
+          transition: 'all 0.5s',
+        }}
+      >
+        <img
+          src={photoData[prevIdx].src}
+          alt={`photo-prev`}
+          style={{
+            width: '100%',
+            aspectRatio: '3/2',
+            objectFit: 'cover',
+            borderRadius: '0.5rem',
           }}
-          onMouseOut={e => {
-            const div = e.currentTarget as HTMLDivElement;
-            div.style.transform = '';
-            const img = div.querySelector('img');
-            if (img) img.style.filter = 'grayscale(1) saturate(3)';
+        />
+      </div>
+
+      {/* 現在の写真（中央） */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 10,
+          width: '90%',
+          aspectRatio: '3/2',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <img
+          src={photoData[current].src}
+          alt={`photo${current + 1}`}
+          style={{
+            width: '100%',
+            aspectRatio: '3/2',
+            objectFit: 'cover',
+            borderRadius: '0.5rem',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+            filter: 'brightness(0.85) grayscale(0.5) saturate(2)',
+            transition: 'transform 0.5s',
           }}
-        >
-          {/* 写真2 */}
-          <img
-            src={photos[1]}
-            alt="photo2"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              aspectRatio: '3/2',
-              objectFit: 'cover',
-              borderRadius: '0.5rem',
-              paddingLeft: '2rem',
-              paddingRight: '2rem',
-              filter:
-                'grayscale(1) saturate(3)',
-              transition: 'filter 0.2s',
-              zIndex: 20,
-            }}
-          />
-          {/* OverlayTextを写真2の左下に絶対配置（画像の枠内） */}
+        />
+        {/* テキストがあれば表示 */}
+        {photoData[current].text && (
           <div
             style={{
               position: 'absolute',
-              left: -30,
-              bottom: -20,
+              left: 0,
+              bottom: 0,
               width: '100%',
               padding: '2rem',
               zIndex: 25,
@@ -109,44 +121,42 @@ const PhotoSlider: React.FC = () => {
               alignItems: 'flex-end',
               justifyContent: 'flex-start',
               boxSizing: 'border-box',
-              transition: 'transform 0.5s',
             }}
           >
-            <OverlayText text="Dokoiku VR" index={1} />
+            <OverlayText text={photoData[current].text} index={photoData[current].index} />
           </div>
-        </div>
-        <div>
-          {/* 写真3 */}
-          <img
-            src={photos[2]}
-            alt="photo3"
-            style={{
-              position: 'absolute',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              bottom: '-25%',
-              width: '90%',
-              aspectRatio: '3/2',
-              objectFit: 'cover',
-              borderRadius: '0.5rem',
-              paddingLeft: '2rem',
-              paddingRight: '2rem',
-              filter:
-                'brightness(0.75) grayscale(1) saturate(3)',
-              transition: 'transform 0.5s',
-              zIndex: 10,
-            }}
-            onMouseOver={e => {
-              e.currentTarget.style.transform = 'translateX(-50%) scale(1.05)';
-            }}
-            onMouseOut={e => {
-              e.currentTarget.style.transform = 'translateX(-50%)';
-            }}
-          />
-        </div>
+        )}
       </div>
-    </>
+
+      {/* 次の写真（下、中央に少し重なる） */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '50%', // 中央より少し下
+          left: '50%',
+          transform: 'translateX(-50%) scale(0.7)',
+          width: '100%',
+          aspectRatio: '3/2',
+          opacity: 0.5,
+          filter: 'blur(2px) grayscale(0.7)',
+          zIndex: 5,
+          pointerEvents: 'none',
+          transition: 'all 0.5s',
+        }}
+      >
+        <img
+          src={photoData[nextIdx].src}
+          alt={`photo-next`}
+          style={{
+            width: '100%',
+            aspectRatio: '3/2',
+            objectFit: 'cover',
+            borderRadius: '0.5rem',
+          }}
+        />
+      </div>
+    </div>
   );
-};
+}
 
 export default PhotoSlider;
