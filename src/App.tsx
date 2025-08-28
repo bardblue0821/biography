@@ -23,12 +23,12 @@ function App() {
   return (
     <main className="fade-in relative">
       {/*ウェルカムメッセージ*/}
-      <div className="fade-black absolute inset-0 z-50 pointer-events-none flex items-center justify-center">
+      <div className="fade-black absolute inset-0 z-1000 pointer-events-none flex items-center justify-center">
         <span className="welcome-text text-white text-5xl font-bold tracking-wide">Welcome</span>
       </div>
 
       {/* 画面分割レイアウト */}
-      <section className="relative h-screen w-full overflow-hidden flex">
+      <section className="relative h-screen w-full flex">
         <BackgroundImage />
         <div className="flex h-full w-full">
           {/* アイコンエリア */}
@@ -36,7 +36,7 @@ function App() {
             <IconArea src={iconImage} />
           </div>
           {/* ポートフォリオエリア */}
-          <div className="h-full w-2/3 relative">
+          <div className="h-full w-2/3">
             <PhotoSlider />
           </div>
         </div>

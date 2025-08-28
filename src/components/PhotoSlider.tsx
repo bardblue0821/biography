@@ -29,8 +29,8 @@ const photos = [photo1, photo2, photo3];
 const PhotoSlider: React.FC = () => {
   return (
     <>
-  <div className="h-full w-full mr-12 flex flex-col items-center justify-center overflow-hidden relative" style={{ zIndex: 10 }}>
-        <div>
+  <div className="h-full w-full flex flex-col items-center justify-center relative">
+        <div className="">
           {/* 写真1 */}
           <img
             src={photos[0]}
@@ -44,11 +44,10 @@ const PhotoSlider: React.FC = () => {
               aspectRatio: '3/2',
               objectFit: 'cover',
               borderRadius: '0.5rem',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               paddingLeft: '2rem',
               paddingRight: '2rem',
               filter:
-                'brightness(0.75) grayscale(1) sepia(1) hue-rotate(190deg) saturate(3)',
+                'brightness(0.75) grayscale(1) saturate(3)',
               transition: 'transform 0.5s',
               zIndex: 10,
             }}
@@ -61,22 +60,18 @@ const PhotoSlider: React.FC = () => {
           />
         </div>
         <div
-          style={{ position: 'relative', width: '100%', height: '0', paddingTop: '66.6667%', transition: 'transform 0.5s, z-index 0.2s', zIndex: 20 }}
+          style={{ position: 'relative', width: '100%', height: '0', paddingTop: '66.6667%', transition: 'transform 0.5s', zIndex: 20 }}
           onMouseOver={e => {
             const div = e.currentTarget as HTMLDivElement;
             div.style.transform = 'scale(1.03)';
-            div.style.zIndex = '100';
-            // 画像のフィルターも変化させる
             const img = div.querySelector('img');
-            if (img) img.style.filter = 'grayscale(0) sepia(0) hue-rotate(0deg) saturate(1)';
+            if (img) img.style.filter = 'grayscale(0) saturate(1)';
           }}
           onMouseOut={e => {
             const div = e.currentTarget as HTMLDivElement;
             div.style.transform = '';
-            div.style.zIndex = '20';
-            // 画像のフィルターも戻す
             const img = div.querySelector('img');
-            if (img) img.style.filter = 'grayscale(1) sepia(1) hue-rotate(190deg) saturate(3)';
+            if (img) img.style.filter = 'grayscale(1) saturate(3)';
           }}
         >
           {/* 写真2 */}
@@ -92,11 +87,10 @@ const PhotoSlider: React.FC = () => {
               aspectRatio: '3/2',
               objectFit: 'cover',
               borderRadius: '0.5rem',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.8)',
               paddingLeft: '2rem',
               paddingRight: '2rem',
               filter:
-                'grayscale(1) sepia(1) hue-rotate(190deg) saturate(3)',
+                'grayscale(1) saturate(3)',
               transition: 'filter 0.2s',
               zIndex: 20,
             }}
@@ -109,7 +103,7 @@ const PhotoSlider: React.FC = () => {
               bottom: -20,
               width: '100%',
               padding: '2rem',
-              zIndex: 30,
+              zIndex: 25,
               pointerEvents: 'none',
               display: 'flex',
               alignItems: 'flex-end',
@@ -135,11 +129,10 @@ const PhotoSlider: React.FC = () => {
               aspectRatio: '3/2',
               objectFit: 'cover',
               borderRadius: '0.5rem',
-              boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
               paddingLeft: '2rem',
               paddingRight: '2rem',
               filter:
-                'brightness(0.75) grayscale(1) sepia(1) hue-rotate(190deg) saturate(3)',
+                'brightness(0.75) grayscale(1) saturate(3)',
               transition: 'transform 0.5s',
               zIndex: 10,
             }}
@@ -151,7 +144,6 @@ const PhotoSlider: React.FC = () => {
             }}
           />
         </div>
-  {/* OverlayTextの全体配置は削除（写真2内に移動済み） */}
       </div>
     </>
   );

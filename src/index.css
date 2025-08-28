@@ -11,7 +11,6 @@
   background: #000;
   opacity: 1;
   transition: opacity 0.8s ease 1s;
-  z-index: 50;
 }
 
 .fade-in.loaded .fade-black {
