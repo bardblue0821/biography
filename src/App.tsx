@@ -4,6 +4,7 @@ import BackgroundImage from './components/BackgroundImage';
 import IconArea from './components/IconArea';
 import PhotoSlider from './components/PhotoSlider';
 import iconImage from '/src/assets/icon.jpg';
+import Footer from './components/Footer';
 
 
 
@@ -36,11 +37,14 @@ function App() {
             <IconArea src={iconImage} />
           </div>
           {/* ポートフォリオエリア */}
-          <div className="h-full w-2/3">
+          <div className="h-full w-2/3 lg:px-16">
             <PhotoSlider />
           </div>
         </div>
       </section>
+
+  {/* フッターをウィンドウ下端に固定表示 */}
+  <Footer />
     </main>
   );
 }

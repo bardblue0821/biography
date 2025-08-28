@@ -62,7 +62,7 @@ const PhotoSlider: React.FC = () => {
       title="クリックで次の写真へ"
     >
       {/* 前の写真（上、中央に少し重なる） */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full scale-70 w-full aspect-[3/2] opacity-50 blur-xs grayscale pointer-events-none transition-all z-5">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full scale-70 w-full aspect-[3/2] blur-xs grayscale pointer-events-none transition-all z-5">
         <Photo
           src={photoData[prevIdx].src}
           alt={`photo-prev`}
@@ -75,7 +75,7 @@ const PhotoSlider: React.FC = () => {
         <Photo
           src={photoData[current].src}
           alt={`photo${current + 1}`}
-          className="w-full aspect-[3/2] object-cover rounded-md shadow-lg brightness-[0.85] grayscale hover:grayscale-0 transition-all duration-500"
+          className="w-full aspect-[3/2] object-cover rounded-md shadow-lg brightness-[0.85] grayscale-50 hover:grayscale-0 transition-all duration-500"
         />
         <div className="absolute left-0 bottom-0 w-full p-8 z-25 pointer-events-none flex items-end justify-start box-border">
           <OverlayText text={photoData[current].text} index={photoData[current].index} />
@@ -83,7 +83,7 @@ const PhotoSlider: React.FC = () => {
       </div>
 
       {/* 次の写真（下、中央に少し重なる） */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 scale-70 w-full aspect-[3/2] opacity-50 blur-xs grayscale pointer-events-none transition-all z-5">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 scale-70 w-full aspect-[3/2] blur-xs grayscale pointer-events-none transition-all z-5">
         <Photo
           src={photoData[nextIdx].src}
           alt={`photo-next`}
