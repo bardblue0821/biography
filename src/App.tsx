@@ -9,10 +9,15 @@ import iconImage from '/src/assets/icon.jpg';
 
 function App() {
   React.useEffect(() => {
+    // bodyにもTailwindのoverflow-hiddenとh-screenを付与
+    document.body.classList.add('overflow-hidden', 'h-screen');
     const main = document.querySelector('.fade-in');
     setTimeout(() => {
       main?.classList.add('loaded');
     }, 1000);
+    return () => {
+      document.body.classList.remove('overflow-hidden', 'h-screen');
+    };
   }, []);
 
   // 写真関連のstate・関数はすべて削除済み
