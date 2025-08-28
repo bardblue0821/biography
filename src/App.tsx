@@ -2,12 +2,12 @@
 import React from 'react';
 import BackgroundImage from './components/BackgroundImage';
 import IconArea from './components/IconArea';
+import PhotoSlider from './components/PhotoSlider';
 import iconImage from '/src/assets/icon.jpg';
 
 
 
 function App() {
-  // ページロード後に.fade-inへ.loadedクラスを追加
   React.useEffect(() => {
     const main = document.querySelector('.fade-in');
     setTimeout(() => {
@@ -27,8 +27,14 @@ function App() {
       {/* 画面分割レイアウト */}
       <section className="relative h-screen w-full overflow-hidden flex">
         <BackgroundImage />
-        <IconArea src={iconImage} />
-  {/* PhotoSliderは削除済み */}
+        <div className="flex h-full w-full">
+          <div className="h-full w-1/3">
+            <IconArea src={iconImage} />
+          </div>
+          <div className="h-full w-2/3 relative">
+            <PhotoSlider />
+          </div>
+        </div>
       </section>
     </main>
   );

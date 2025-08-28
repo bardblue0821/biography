@@ -29,6 +29,11 @@
   opacity: 0;
 }
 
+html, body {
+  min-width: 400px;
+  min-height: 600px;
+}
+
 h1 {
   font-family: 'Archivo Black', sans-serif;
   letter-spacing: -0.05em;
