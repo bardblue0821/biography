@@ -9,7 +9,7 @@ import iconImage from '/src/assets/icon.jpg';
 
 function App() {
   React.useEffect(() => {
-    // bodyにもTailwindのoverflow-hiddenとh-screenを付与
+    // bodyにもTailwindのoverflow-hiddenとh-screenを付与して、スクロールバーを消す
     document.body.classList.add('overflow-hidden', 'h-screen');
     const main = document.querySelector('.fade-in');
     setTimeout(() => {
@@ -19,8 +19,6 @@ function App() {
       document.body.classList.remove('overflow-hidden', 'h-screen');
     };
   }, []);
-
-  // 写真関連のstate・関数はすべて削除済み
 
   return (
     <main className="fade-in relative">
@@ -33,9 +31,11 @@ function App() {
       <section className="relative h-screen w-full overflow-hidden flex">
         <BackgroundImage />
         <div className="flex h-full w-full">
+          {/* アイコンエリア */}
           <div className="h-full w-1/3">
             <IconArea src={iconImage} />
           </div>
+          {/* ポートフォリオエリア */}
           <div className="h-full w-2/3 relative">
             <PhotoSlider />
           </div>

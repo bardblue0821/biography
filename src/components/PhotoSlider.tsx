@@ -6,18 +6,21 @@ import photo3 from '../assets/VRChat_2024-01-15_15-25-12.422_3840x2160.png';
 
 const OverlayText: React.FC<{ text: string, index: number }> = ({ text, index }) => (
   <span
-    className="text-white font-extrabold drop-shadow-lg select-none"
+    className="text-white font-extrabold select-none"
     style={{
       fontSize: 'clamp(2rem, 8vw, 6rem)',
       lineHeight: 1.1,
       textAlign: 'left',
       display: 'block',
+      textShadow: '0 4px 16px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.5)',
     }}
   >
-    <h1 style={{ fontSize: 'clamp(2rem, 8vw, 6rem)', margin: 0, textAlign: 'left' }}>
+    <h1 style={{ fontSize: 'clamp(2rem, 8vw, 6rem)', margin: 0, textAlign: 'left', textShadow: '0 4px 16px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.5)' }}>
       {index.toString().padStart(2, '0')}
     </h1>
-    <h1 style={{ fontSize: 'clamp(2rem, 8vw, 6rem)', margin: 0, textAlign: 'left' }}>{text}</h1>
+    <h1 style={{ fontSize: 'clamp(2rem, 8vw, 6rem)', margin: 0, textAlign: 'left', textShadow: '0 4px 16px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.5)' }}>
+      {text}
+    </h1>
   </span>
 );
 
@@ -26,7 +29,7 @@ const photos = [photo1, photo2, photo3];
 const PhotoSlider: React.FC = () => {
   return (
     <>
-  <div className="h-full w-full flex flex-col items-center justify-center overflow-hidden relative" style={{ zIndex: 10 }}>
+  <div className="h-full w-full mr-12 flex flex-col items-center justify-center overflow-hidden relative" style={{ zIndex: 10 }}>
         <div>
           {/* 写真1 */}
           <img
@@ -102,8 +105,8 @@ const PhotoSlider: React.FC = () => {
           <div
             style={{
               position: 'absolute',
-              left: 0,
-              bottom: 0,
+              left: -30,
+              bottom: -20,
               width: '100%',
               padding: '2rem',
               zIndex: 30,
