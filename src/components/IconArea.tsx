@@ -2,7 +2,7 @@ import React from 'react';
 
 const IconArea: React.FC<{ src: string }> = ({ src }) => (
   <div className="flex flex-col items-center justify-center h-full relative w-full">
-    <div className="w-full flex justify-center items-center">
+    <div className="p-12 w-full flex justify-center items-center">
       <img
         src={src}
         alt="アイコン"
@@ -11,19 +11,14 @@ const IconArea: React.FC<{ src: string }> = ({ src }) => (
       />
     </div>
     
-    <div className="w-full mt-4">
+    <div className="w-full -mt-8">
       <h1
-        className="px-4 drop-shadow text-gray-200 font-semibold w-full text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+        className="drop-shadow text-gray-200 font-semibold w-full text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
       >
+        Hi! I'm<br />
         Bardblue
       </h1>
-      <p
-        className="px-4 drop-shadow text-gray-200 font-medium w-full text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-      >
-        バードブルー
-      </p>
     </div>
-    
   </div>
 );
 
