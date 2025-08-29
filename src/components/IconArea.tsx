@@ -12,7 +12,7 @@ const IconArea: React.FC<{ src: string }> = ({ src }) => {
         <img
           src={src}
           alt="アイコン"
-          className="w-full max-w-xs h-auto object-cover rounded-full border-4 border-black shadow-lg transition-transform duration-700 hover:rotate-[10deg] z-10"
+          className="w-full max-w-xs h-auto object-cover rounded-full border-4 border-gray-200 shadow-lg transition-transform duration-700 hover:rotate-[10deg] z-10"
           style={{
             aspectRatio: '1/1',
             transition: 'all 0.5s ease-in-out',

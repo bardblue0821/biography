@@ -37,7 +37,7 @@ function App() {
             <IconArea src={iconImage} />
           </div>
           {/* ポートフォリオエリア */}
-          <div className="h-full w-2/3 lg:px-16">
+          <div className="h-full w-2/3 z-10 flex flex-col justify-center items-center">
             <PhotoSlider />
           </div>
         </div>
