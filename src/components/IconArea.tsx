@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-const IconArea: React.FC<{ src: string }> = ({ src }) => {
+import iconImage from '/src/assets/icon.jpg';
+
+const IconArea: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <div className="flex flex-col items-center justify-center h-full relative w-full">
@@ -10,7 +12,7 @@ const IconArea: React.FC<{ src: string }> = ({ src }) => {
         style={{ minHeight: '220px', transition: 'all 0.5s ease-in-out' }}
       >
         <img
-          src={src}
+          src={iconImage}
           alt="アイコン"
           className="w-full max-w-xs h-auto object-cover rounded-full border-4 border-gray-200 shadow-lg transition-transform duration-700 hover:rotate-[10deg] z-10"
           style={{
