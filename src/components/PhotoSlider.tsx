@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Photo from './Photo';
-// import photo1 from '../assets/4c8C0BKg.jpg';
-// import photo2 from '../assets/VRChat_2023-10-04_23-15-08.604_1920x1080.png';
+import photo1 from '../assets/4c8C0BKg.jpg';
+import photo2 from '../assets/VRChat_2023-10-04_23-15-08.604_1920x1080.png';
 import photo3 from '../assets/VRChat_2024-01-15_15-25-12.422_3840x2160.png';
-import photo4 from '../assets/VRChat_2024-02-07_00-14-01.583_1280x720.png';
-import photo5 from '../assets/VRChat_2024-02-13_01-03-33.799_3840x2160.png';
+//import photo4 from '../assets/VRChat_2024-02-07_00-14-01.583_1280x720.png';
+//import photo5 from '../assets/VRChat_2024-02-13_01-03-33.799_3840x2160.png';
 // import photo6 from '../assets/VRChat_2024-02-21_01-49-55.853_3840x2160.png';
 // import photo7 from '../assets/VRChat_2024-02-23_19-41-10.234_3840x2160.png';
 
@@ -18,11 +18,11 @@ const PhotoSlider: React.FC = () => {
   const [i, setI] = useState<number>(0);
   type PhotoType = { src: string; alt: string; number: string; text: string };
   const photos: PhotoType[] = [
-    //{ src: photo1, alt: 'Photo 1', number: '06', text: 'VRChat' },
-    //{ src: photo2, alt: 'Photo 2', number: '07', text: 'VRChat' },
+    { src: photo1, alt: 'Photo 1', number: '02', text: 'Super Todo' },
+    { src: photo2, alt: 'Photo 2', number: '03', text: 'Biography' },
     { src: photo3, alt: 'Photo 3', number: '01', text: 'DokoIku VR' },
-    { src: photo4, alt: 'Photo 4', number: '02', text: 'Super Todo (beta)' },
-    { src: photo5, alt: 'Photo 5', number: '03', text: 'Biography' },
+    //{ src: photo4, alt: 'Photo 4', number: '02', text: 'Super Todo (beta)' },
+    //{ src: photo5, alt: 'Photo 5', number: '03', text: 'Biography' },
     //{ src: photo6, alt: 'Photo 6', number: '04', text: 'VRChat' },
     //{ src: photo7, alt: 'Photo 7', number: '05', text: 'VRChat' },
   ];

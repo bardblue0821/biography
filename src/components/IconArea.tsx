@@ -1,14 +1,38 @@
 import React, { useState } from 'react';
 import iconImage from '/src/assets/icon.jpg';
 
-const IconArea: React.FC = () => {
+type ChildProps = {
+  onChange: (newValue: "portfolio" | "career" | "hobby") => void;
+};
+
+const IconArea: React.FC<ChildProps> = ({ onChange }: ChildProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  
   return (
-    <div className="flex flex-col items-center justify-center h-full relative w-full">
+    <div 
+      className="h-full w-full flex flex-col items-center justify-center relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className="w-full -mb-8">
+        <h1
+          className={`${isHovered ? 'text-gray-200' : 'text-transparent'} text-gray-200 font-semibold w-full text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl transition-colors duration-500`}
+          style={{
+            textShadow: `
+              -5px -5px 0 #fff, 
+              5px -5px 0 #fff, 
+              -5px 5px 0 #fff, 
+              5px 5px 0 #fff, 
+            `,
+          }}
+        >
+          Hi! I'm<br />
+          Bardblue
+        </h1>
+      </div>
+
       <div
         className="p-12 w-full flex justify-center items-center relative"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         style={{ minHeight: '220px', transition: 'all 0.5s ease-in-out' }}
       >
         <img
@@ -20,57 +44,22 @@ const IconArea: React.FC = () => {
             transition: 'all 0.5s ease-in-out',
           }}
         />
-
-        {/* ホバー時に右へ伸びるラベル */}
-        {['Portfolio', 'Career', 'Award', 'Hobby'].map((label, i) => (
-            <div
-            key={label}
-            className="absolute left-1/2 top-1/2"
-            style={{
-              transform: `translate(-50%,-50%) translateY(${(i - 1.5) * 48}px) translateX(100px)`,
-              width: isHovered ? '100%' : '0px',
-              maxWidth: '400px',
-              height: '40px',
-              background: '#fff',
-              color: '#222',
-              borderRadius: '16px',
-              boxShadow: '2px 2px 8px rgba(0,0,0,0.12)',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              paddingRight: isHovered ? '20px' : '0px',
-              fontWeight: 700,
-              fontSize: '1.2rem',
-              letterSpacing: '0.02em',
-              opacity: isHovered ? 1 : 0,
-              transition: 'width 0.5s cubic-bezier(.4,0,.2,1), opacity 0.4s, padding-right 0.5s',
-              zIndex: 5,
-            }}
-            >
-            {isHovered && label}
-            </div>
-        ))}
       </div>
-      <div className="w-full -mt-8">
-        <h1
-          className={`text-gray-200 font-semibold w-full text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl transition-colors duration-500 ${
-        isHovered ? 'text-gray-200' : 'text-transparent'
-          }`}
-          style={{
-        textShadow: `
-          -5px -5px 0 #fff, 
-          5px -5px 0 #fff, 
-          -5px 5px 0 #fff, 
-          5px 5px 0 #fff, 
-        `,
-          }}
-        >
-          Hi! I'm<br />
-          Bardblue
-        </h1>
+
+      <div className={`${isHovered ? 'text-gray-200' : 'text-transparent'} w-full -mt-8 flex-col justify-center items-center relative`}>
+        <div className="font-semibold w-full text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-sky-300 cursor-pointer">
+          <button onClick={() => onChange('portfolio')} className="cursor-pointer"><h1>Portfolio</h1></button>
+        </div>
+        <div className="font-semibold w-full text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-sky-300 cursor-pointer">
+          <button onClick={() => onChange('career')} className="cursor-pointer"><h1>Career</h1></button>
+        </div>
+        <div className="font-semibold w-full text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-sky-300 cursor-pointer"> 
+          <button onClick={() => onChange('hobby')} className="cursor-pointer"><h1>Hobby</h1></button>
+        </div>
       </div>
     </div>
+
+    
   );
 };
 
