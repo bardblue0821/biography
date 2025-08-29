@@ -11,7 +11,6 @@
   background: #000;
   opacity: 1;
   transition: opacity 0.8s ease 1s;
-  z-index: 50;
 }
 
 .fade-in.loaded .fade-black {
@@ -27,6 +26,11 @@
 
 .fade-in.loaded .welcome-text {
   opacity: 0;
+}
+
+html, body {
+  min-width: 400px;
+  min-height: 600px;
 }
 
 h1 {
