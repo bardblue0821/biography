@@ -25,7 +25,7 @@ function App() {
     <main className="fade-in relative">
       {/*ウェルカムメッセージ*/}
       <div className="fade-black absolute inset-0 z-1000 pointer-events-none flex items-center justify-center">
-        <span className="welcome-text text-white text-5xl font-bold tracking-wide">Welcome</span>
+        <span className="welcome-text text-white text-5xl font-bold tracking-wide"><h1>Welcome</h1></span>
       </div>
 
       {/* 画面分割レイアウト */}
