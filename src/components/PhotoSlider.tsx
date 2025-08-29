@@ -10,6 +10,7 @@ import photo7 from '../assets/VRChat_2024-02-23_19-41-10.234_3840x2160.png';
 
 function PhotoSlider() {
   const [moved, setMoved] = useState(false);
+  const [direction, setDirection] = useState<1 | 0 | -1>(0);  // 1: scroll down, -1: scroll up
   const [i, setI] = useState(0);
   const photos = [
     { src: photo1, alt: 'Photo 1', text: '友達と一緒に撮った写真です。' },
@@ -28,48 +29,82 @@ function PhotoSlider() {
     <div className="h-full w-full pr-18 pl-12 flex items-center justify-center">
       <div
         className="flex flex-col gap-4 items-center justify-center w-full"
-        onClick={() => {
-          setMoved(true);
+        onWheel={(e) => {
+          if (e.deltaY > 0 && !moved) {
+            setMoved(true);
+            setDirection(1);  // scroll down
+          } else if (e.deltaY < 0 && !moved) {
+            setMoved(true);
+            setDirection(-1);  // scroll up
+          }
         }}
         onTransitionEnd={() => {
           if (moved) {
-            setI(i + 1);
+            setI(i + direction);
             setMoved(false);
+            setDirection(0);
           }
         }}
         style={{
           transition: moved ? '0.5s' : 'none',
-          transform: moved ? 'translateY(-20%)' : 'translateY(0)',
+          transform: moved
+            ? direction === 1
+              ? 'translateY(-20%)'
+              : direction === -1
+              ? 'translateY(20%)'
+              : 'translateY(0)'
+            : 'translateY(0)',
         }}
       >
+        {}
         <div
-          className="relative px-8 aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
+          className="relative px-8 
+          aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
         >
-          <Photo src={photos[(i) % photos.length].src} alt={photos[(i) % photos.length].alt} className="object-cover w-full h-full" />
+          <Photo 
+            src={photos[(((i % photos.length) + photos.length) % photos.length)].src} 
+            alt={photos[(((i % photos.length) + photos.length) % photos.length)].alt} 
+            className="object-cover w-full h-full" />
         </div>
 
         <div
-          className="relative px-8 aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
+          className={`relative ${moved && direction === -1 ? 'duration-500' : 'px-8'} 
+          aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
         >
-          <Photo src={photos[(i + 1) % photos.length].src} alt={photos[(i + 1) % photos.length].alt} className="object-cover w-full h-full" />
+          <Photo 
+            src={photos[((((i + 1) % photos.length) + photos.length) % photos.length)].src} 
+            alt={photos[((((i + 1) % photos.length) + photos.length) % photos.length)].alt} 
+            className="object-cover w-full h-full" />
         </div>
 
         <div
-          className={`relative ${moved ? ' duration-500 px-8' : ''} aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
+          className={`relative ${moved ? 'duration-500 px-8' : ''} 
+          aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
         >
-          <Photo src={photos[(i + 2) % photos.length].src} alt={photos[(i + 2) % photos.length].alt} className="object-cover w-full h-full" />
+          <Photo 
+            src={photos[((((i + 2) % photos.length) + photos.length) % photos.length)].src} 
+            alt={photos[((((i + 2) % photos.length) + photos.length) % photos.length)].alt} 
+            className="object-cover w-full h-full" />
         </div>
 
         <div
-          className={`relative ${moved ? ' duration-500' : ' px-8'} aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
+          className={`relative ${moved && direction === 1 ? 'duration-500' : 'px-8'}  
+          aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
         >
-          <Photo src={photos[(i + 3) % photos.length].src} alt={photos[(i + 3) % photos.length].alt} className="object-cover w-full h-full" />
+          <Photo 
+            src={photos[((((i + 3) % photos.length) + photos.length) % photos.length)].src} 
+            alt={photos[((((i + 3) % photos.length) + photos.length) % photos.length)].alt} 
+            className="object-cover w-full h-full" />
         </div>
 
         <div
-          className="relative px-8 aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
+          className="relative px-8 
+          aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
         >
-          <Photo src={photos[(i + 4) % photos.length].src} alt={photos[(i + 4) % photos.length].alt} className="object-cover w-full h-full" />
+          <Photo 
+            src={photos[((((i + 4) % photos.length) + photos.length) % photos.length)].src} 
+            alt={photos[((((i + 4) % photos.length) + photos.length) % photos.length)].alt} 
+            className="object-cover w-full h-full" />
         </div>
       </div>
     </div>
