@@ -29,7 +29,7 @@ const PhotoSlider: React.FC = () => {
 
   return (
     <>
-      <div className="h-full w-full pr-18 pl-12 flex items-center justify-center">
+      <div className="h-full w-full pr-18 pl-4 flex items-center justify-center">
         <div
           className="flex flex-col gap-4 items-center justify-center w-full"
           onWheel={(e: React.WheelEvent<HTMLDivElement>) => {
@@ -74,7 +74,11 @@ const PhotoSlider: React.FC = () => {
           {/* 前の写真 */}
           <div
             className={`relative ${moved && direction === -1 ? 'duration-500' : 'px-8 grayscale-[70%]'} 
-            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
+            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[40%]`}
+            onClick={() => {
+              setMoved(true);
+              setDirection(-1);
+            }}
           >
             <Photo
               src={photos[returnIndex(i + 1, photos.length)].src}
@@ -86,7 +90,7 @@ const PhotoSlider: React.FC = () => {
           {/* 現在の写真 */}
           <div
             className={`relative ${moved ? 'duration-500 px-8 grayscale-[70%]' : ''} 
-            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
+            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer`}
           >
             <Photo
               src={photos[returnIndex(i + 2, photos.length)].src}
@@ -98,7 +102,11 @@ const PhotoSlider: React.FC = () => {
           {/* 次の写真 */}
           <div
             className={`relative ${moved && direction === 1 ? 'duration-500' : 'px-8 grayscale-[70%]'} 
-            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full`}
+            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[40%]`}
+            onClick={() => {
+              setMoved(true);
+              setDirection(1);
+            }}
           >
             <Photo
               src={photos[returnIndex(i + 3, photos.length)].src}
