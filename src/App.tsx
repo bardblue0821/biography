@@ -5,28 +5,20 @@ import IconArea from './components/IconArea';
 import PhotoSlider from './components/PhotoSlider';
 import iconImage from '/src/assets/icon.jpg';
 import Footer from './components/Footer';
-
-
+import Welcome from './components/Welcome';
 
 function App() {
   React.useEffect(() => {
-    // bodyにもTailwindのoverflow-hiddenとh-screenを付与して、スクロールバーを消す
-    document.body.classList.add('overflow-hidden', 'h-screen');
-    const main = document.querySelector('.fade-in');
-    setTimeout(() => {
-      main?.classList.add('loaded');
-    }, 1000);
+    document.body.style.overflow = 'hidden';
     return () => {
-      document.body.classList.remove('overflow-hidden', 'h-screen');
+      document.body.style.overflow = '';
     };
   }, []);
 
   return (
-    <main className="fade-in relative">
+    <main className="relative">
       {/*ウェルカムメッセージ*/}
-      <div className="fade-black absolute inset-0 z-1000 pointer-events-none flex items-center justify-center">
-        <span className="welcome-text text-white text-5xl font-bold tracking-wide"><h1>Welcome</h1></span>
-      </div>
+      <Welcome />
 
       {/* 画面分割レイアウト */}
       <section className="relative h-screen w-full flex">
@@ -43,8 +35,8 @@ function App() {
         </div>
       </section>
 
-  {/* フッターをウィンドウ下端に固定表示 */}
-  <Footer />
+      {/* フッターをウィンドウ下端に固定表示 */}
+      <Footer />
     </main>
   );
 }

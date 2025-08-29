@@ -119,11 +119,9 @@ const PhotoSlider: React.FC = () => {
             />
           </div>
         </div>
-
-        
-        
-        
       </div>
+
+      {/*説明テキスト*/}
       <div
         className="absolute w-2/3 h-full flex items-center justify-center z-10 pointer-events-none"
         style={{
@@ -132,7 +130,9 @@ const PhotoSlider: React.FC = () => {
           opacity: moved ? 0 : 1,
         }}
       >
-        <h1 className="absolute right-10 bottom-50 lg:bottom-35 bg-opacity-100 text-white px-4 py-2 rounded text-5xl lg:text-8xl font-bold text-right">
+        <h1
+          className="absolute right-10 bottom-[30vh] lg:bottom-[20vh] bg-opacity-100 text-white px-4 py-2 rounded text-5xl lg:text-8xl font-bold text-right"
+        >
           {photos[returnIndex(i + 2, photos.length)].number}
           <br />
           {photos[returnIndex(i + 2, photos.length)].text}
