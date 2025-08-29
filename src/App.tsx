@@ -16,26 +16,23 @@ function App() {
   }, []);
 
   return (
-    <main className="relative">
+    <main className="relative h-screen w-full flex">
       {/*ウェルカムメッセージ*/}
       <Welcome />
 
       {/* 画面分割レイアウト */}
-      <section className="relative h-screen w-full flex">
-        <BackgroundImage />
-        <div className="flex h-full w-full">
-          {/* アイコンエリア */}
-          <div className="h-full w-1/3">
-            <IconArea src={iconImage} />
-          </div>
-          {/* ポートフォリオエリア */}
-          <div className="h-full w-2/3 z-10 flex flex-col justify-center items-center">
-            <PhotoSlider />
-          </div>
+      <div className="flex h-full w-full">
+        {/* アイコンエリア */}
+        <div className="h-full w-1/3">
+          <IconArea src={iconImage} />
         </div>
-      </section>
-
-      {/* フッターをウィンドウ下端に固定表示 */}
+        {/* ポートフォリオエリア */}
+        <div className="h-full w-2/3 z-10 flex flex-col justify-center items-center">
+          <PhotoSlider />
+        </div>
+      </div>
+      
+      <BackgroundImage />
       <Footer />
     </main>
   );
