@@ -12,7 +12,7 @@ h2 {
   font-family: 'Archivo Black', sans-serif;
 }
 
-li {
+p, li {
   font-family: Verdana, sans-serif;
   line-height: 1.75rem;
 }

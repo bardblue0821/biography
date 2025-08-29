@@ -9,7 +9,7 @@ const Welcome: React.FC = () => {
   }, []);
 
   return (
-    <div className={`${showWelcome ? 'opacity-100' : 'opacity-0'} bg-sky-900 duration-500 absolute inset-0 z-1000 pointer-events-none flex items-center justify-center`}>
+    <div className={`${showWelcome ? 'opacity-100' : 'opacity-0'} bg-sky-900 grayscale-60 duration-500 absolute inset-0 z-1000 pointer-events-none flex items-center justify-center`}>
       <span className="welcome-text text-white text-6xl font-bold tracking-wide">
         <h1>Welcome</h1>
       </span>
