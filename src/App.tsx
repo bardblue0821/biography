@@ -28,7 +28,7 @@ function App() {
   };
 
   // 言語状態（グローバル）
-  const [lang, setLang] = useState<'ja' | 'en'>('ja');
+  const [lang, setLang] = useState<'ja' | 'en'>('en');
   const handleLanguageChange = () => {
     setLang(lang === 'ja' ? 'en' : 'ja');
   };

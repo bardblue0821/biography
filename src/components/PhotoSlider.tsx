@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Photo from './Photo';
-import photo1 from '../assets/4c8C0BKg.jpg';
-import photo2 from '../assets/VRChat_2023-10-04_23-15-08.604_1920x1080.png';
-import photo3 from '../assets/VRChat_2024-01-15_15-25-12.422_3840x2160.png';
+//import photo1 from '../assets/4c8C0BKg.jpg';
+import photo1 from '../assets/SuperTodo.png';
+//import photo2 from '../assets/VRChat_2023-10-04_23-15-08.604_1920x1080.png';
+import photo2 from '../assets/Biography2.png';
+import photo3 from '../assets/DokoIkuVR2.png';
 //import photo4 from '../assets/VRChat_2024-02-07_00-14-01.583_1280x720.png';
 //import photo5 from '../assets/VRChat_2024-02-13_01-03-33.799_3840x2160.png';
 // import photo6 from '../assets/VRChat_2024-02-21_01-49-55.853_3840x2160.png';
@@ -31,7 +33,7 @@ const PhotoSlider: React.FC = () => {
     <>
       <div className="h-full w-full pr-18 pl-4 flex items-center justify-center">
         <div
-          className="flex flex-col gap-4 items-center justify-center w-full"
+          className="flex flex-col gap-16 items-center justify-center w-full"
           onWheel={(e: React.WheelEvent<HTMLDivElement>) => {
             if (e.deltaY > 0 && !moved) {
               setMoved(true);
@@ -52,16 +54,16 @@ const PhotoSlider: React.FC = () => {
             transition: moved ? '0.5s cubic-bezier(0.4,0,0.2,1)' : 'none',
             transform: moved
               ? direction === 1
-                ? 'translateY(-20%)'
+                ? 'translateY(-20.4%)'
                 : direction === -1
-                ? 'translateY(20%)'
+                ? 'translateY(20.4%)'
                 : 'translateY(0)'
               : 'translateY(0)',
           }}
         >
           {/* 前の前の写真 */}
           <div
-            className="relative px-8 grayscale-[70%]
+            className="relative px-16 grayscale-[70%]
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
           >
             <Photo
@@ -73,8 +75,8 @@ const PhotoSlider: React.FC = () => {
 
           {/* 前の写真 */}
           <div
-            className={`relative ${moved && direction === -1 ? 'duration-500' : 'px-8 grayscale-[70%]'} 
-            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[40%]`}
+            className={`relative ${moved && direction === -1 ? 'duration-500' : 'px-16 grayscale-[100%]'} 
+            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[70%]`}
             onClick={() => {
               setMoved(true);
               setDirection(-1);
@@ -89,7 +91,7 @@ const PhotoSlider: React.FC = () => {
 
           {/* 現在の写真 */}
           <div
-            className={`relative ${moved ? 'duration-500 px-8 grayscale-[70%]' : ''} 
+            className={`relative ${moved ? 'duration-500 px-16 grayscale-[100%]' : ''} 
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer`}
           >
             <Photo
@@ -101,8 +103,8 @@ const PhotoSlider: React.FC = () => {
 
           {/* 次の写真 */}
           <div
-            className={`relative ${moved && direction === 1 ? 'duration-500' : 'px-8 grayscale-[70%]'} 
-            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[40%]`}
+            className={`relative ${moved && direction === 1 ? 'duration-500' : 'px-16 grayscale-[100%]'} 
+            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[70%]`}
             onClick={() => {
               setMoved(true);
               setDirection(1);
@@ -117,7 +119,7 @@ const PhotoSlider: React.FC = () => {
 
           {/* 次の次の写真 */}
           <div
-            className="relative px-8 grayscale-[70%]
+            className="relative px-16 grayscale-[70%]
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
           >
             <Photo
@@ -139,10 +141,14 @@ const PhotoSlider: React.FC = () => {
         }}
       >
         <h1
-          className="absolute right-10 bottom-[30vh] lg:bottom-[20vh] bg-opacity-100 text-white px-4 py-2 rounded text-5xl lg:text-8xl font-bold text-right"
+          className="absolute -right-20 bottom-[30vh] lg:bottom-[20vh] bg-opacity-100 text-sky-400 px-4 py-2 rounded text-5xl lg:text-8xl font-bold text-right"
+          style={{
+            WebkitTextStroke: '2px white',
+            textShadow: '6px 6px 4px rgba(0, 0, 0, 0.7)',
+          }}
         >
-          {photos[returnIndex(i + 2, photos.length)].number}
-          <br />
+          <span className="text-gray-400 text-7xl">{photos[returnIndex(i + 2, photos.length)].number} </span>
+          
           {photos[returnIndex(i + 2, photos.length)].text}
         </h1>
       </div>

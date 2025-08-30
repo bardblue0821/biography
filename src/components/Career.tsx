@@ -39,7 +39,7 @@ const Icons = () => {
 
 const JobDescEng = () => {
   return (
-    <div className="text-gray-200 mt-4 flex flex-col justify-center items-center h-full">
+    <div className="text-gray-200 flex flex-col justify-center items-center h-full">
       <h1 className="text-sky-300 xl:text-8xl text-7xl zen-kaku-gothic-new-black">Career</h1>
       <h2 className="xl:text-5xl text-4xl mt-12 zen-kaku-gothic-new-bold">App Dev Engineer</h2>
       <ul className="text-xl list-disc list-inside mt-4 zen-kaku-gothic-new-regular">
@@ -67,7 +67,7 @@ const JobDescEng = () => {
 const JobDescJpn = () => {
   return (
     <div className="text-gray-200 flex flex-col justify-center items-center h-full">
-      <h1 className="text-sky-300 text-7xl zen-kaku-gothic-new-black tracking-[-0.20em]">キャリア</h1>
+      <h1 className="text-sky-300 text-7xl zen-kaku-gothic-new-black tracking-[-0.20em]">職務経歴</h1>
       <h2 className="text-4xl mt-12 zen-kaku-gothic-new-bold">職務内容</h2>
       <ul className="text-xl mt-4 list-disc list-inside zen-kaku-gothic-new-regular">
         <li>半導体試験アプリケーション開発</li>
