@@ -56,7 +56,7 @@ function App() {
               <div ref={nodeRef} className="w-full h-full flex justify-center items-center">
                 {showingContent === 'portfolio' && <PhotoSlider />}
                 {showingContent === 'hobby'     && <Hobby lang={lang} />}
-                {showingContent === 'career'    && <Career />}
+                {showingContent === 'career'    && <Career lang={lang} />}
               </div>
             </CSSTransition>
           </SwitchTransition>
