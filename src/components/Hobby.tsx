@@ -1,21 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Hobby: React.FC = () => {
-    return (
-        <div className="flex  items-center h-screen w-full">
-          <div className="w-[90%] h-[80%] bg-gray-900 opacity-80 p-10 flex flex-col justify-center items-center overflow-auto scrollbar-hide">
-            <h1 className="text-sky-300 text-7xl">Hobby</h1>
-            <h2 className="text-gray-200 text-4xl mt-8">XR Technology</h2>
-            <p className="text-gray-200 mt-2">Creating 3D Worlds by Unity for VRChat</p>
+const Hobby: React.FC<{ lang: 'ja' | 'en' }> = ({ lang }) => {
+  const [displayLang, setDisplayLang] = useState(lang);
+  const [fade, setFade] = useState(false);
 
-            <h2 className="text-white text-4xl mt-8">Audio Signal Processing</h2>
-            <p className="text-white mt-2">Making a software synthesizer and effects</p>
-            <h2 className="text-white text-4xl mt-8">Creative Activity</h2>
-            <p className="text-white mt-2">Composing Music / Illustrating</p>
-            <h2 className="text-gray-200 text-4xl mt-8">Smile Together 😊</h2>
-          </div>
+  useEffect(() => {
+    setFade(true);
+    const timer = setTimeout(() => {
+      setDisplayLang(lang);
+      setFade(false);
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [lang]);
+
+  return (
+    <div className="flex items-center h-screen w-full relative">
+      <div className="w-[90%] h-[80%] bg-gray-900 opacity-80 p-10 flex flex-col justify-center items-center overflow-auto scrollbar-hide rounded-xl">
+  <div className={`transition-opacity duration-400 ${fade ? 'opacity-0' : 'opacity-100'} w-full`}>
+          {displayLang === 'ja' ? (
+            <>
+              <h1 className="text-sky-300 text-7xl zen-kaku-gothic-new-black">趣味</h1>
+              <h2 className="text-gray-200 text-xl mt-4">みんなで笑うこと 😊</h2>
+              <h2 className="text-gray-200 text-4xl mt-12 zen-kaku-gothic-new-bold">XR 技術</h2>
+              <p className="text-gray-200 text-xl mt-3 zen-kaku-gothic-new-regular">Unity で VRChat 向け 3D モデルを制作</p>
+              <p className="text-gray-200 text-xl mt-1 zen-kaku-gothic-new-regular">総来場者数 10000 人達成</p>
+              <h2 className="text-white text-4xl mt-12 zen-kaku-gothic-new-bold">音響信号処理</h2>
+              <p className="text-white mt-3 text-xl zen-kaku-gothic-new-regular">シンセサイザーやエフェクトソフト開発</p>
+              <h2 className="text-white text-4xl mt-12 zen-kaku-gothic-new-bold">創作活動</h2>
+              <p className="text-white mt-3 text-xl zen-kaku-gothic-new-regular">作曲・イラスト制作</p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-sky-300 text-7xl">Hobby</h1>
+              <h2 className="text-gray-200 text-xl mt-2">Smile Together 😊</h2>
+              <h2 className="text-gray-200 text-4xl mt-12 zen-kaku-gothic-new-bold">XR Technology</h2>
+              <p className="text-gray-200 text-xl mt-3 zen-kaku-gothic-new-regular">Creating 3D Worlds by Unity for VRChat</p>
+              <p className="text-gray-200 text-xl mt-1 zen-kaku-gothic-new-regular">Total visitors: 10,000+</p>
+              <h2 className="text-white text-4xl mt-12 zen-kaku-gothic-new-bold">Audio Signal Processing</h2>
+              <p className="text-white mt-3 text-xl zen-kaku-gothic-new-regular">Developing synthesizer and effect software</p>
+              <h2 className="text-white text-4xl mt-12 zen-kaku-gothic-new-bold">Creative Activity</h2>
+              <p className="text-white mt-3 text-xl zen-kaku-gothic-new-regular">Composing music / Illustrating</p>
+            </>
+          )}
         </div>
-      );
+      </div>
+    </div>
+  );
 };
 
 export default Hobby;

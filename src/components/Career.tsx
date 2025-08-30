@@ -17,10 +17,10 @@ import { FaAws } from 'react-icons/fa';
 const Career: React.FC = () => {
   return (
     <div className="flex  items-center h-screen w-full">
-      <div className="w-[90%] h-[80%] bg-gray-900 opacity-80 p-10 flex flex-col justify-center items-center overflow-auto scrollbar-hide">
+      <div className="w-[90%] h-[80%] bg-gray-900 opacity-80 p-10 flex flex-col justify-center items-center overflow-auto scrollbar-hide rounded-xl">
         <h1 className="text-sky-300 text-7xl">Career</h1>
         <h1 className="text-white text-5xl mt-4">App Dev Engineer</h1>
-        <h2 className="text-gray-200 text-3xl mt-8">5 years</h2>
+        <h2 className="text-gray-200 text-3xl mt-6">5 years</h2>
         <ul className="text-gray-200 list-disc list-inside mt-2">
           <li>Semiconductor Production Test App Dev</li>
           <li>New Product Dev and Market Research</li>
@@ -32,13 +32,13 @@ const Career: React.FC = () => {
             <span><SiPython size={40} color="#3776AB" /></span>
             <span><SiCplusplus size={40} color="#00599C" /></span>
             <span><SiLaravel size={40} color="#FF2D20" /></span>
-            <span><SiPhp size={40} color="#777BB4" /></span>
-            <span><SiMysql size={40} color="#4479A1" /></span>
+            <span><SiPhp size={54} color="#777BB4" /></span>
+            <span><SiMysql size={48} color="#4479A1" /></span>
             <span><SiGit size={40} color="#F1502F" /></span>
           </div>
-          <div className="mt-4 flex space-x-4 justify-center items-center">
+          <div className="mt-2 flex space-x-4 justify-center items-center">
             <span><SiReact size={40} color="#61DAFB" /></span>
-            <span><SiNextdotjs size={40} color="#000000" /></span>
+            <span><SiNextdotjs size={40} color="#868686" /></span>
             <span><SiTailwindcss size={40} color="#06B6D4" /></span>
             <span><SiTypescript size={40} color="#3178C6" /></span>
             <span><SiDocker size={40} color="#2496ED" /></span>

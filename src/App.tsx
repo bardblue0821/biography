@@ -8,10 +8,12 @@ import Footer from './components/Footer';
 import Welcome from './components/Welcome';
 import Hobby from './components/Hobby';
 import Career from './components/Career';
+import Header from './components/Header';
 
 function App() {
   const nodeRef = React.useRef<HTMLDivElement>(null);
-  {/* スクロール無効化*/}
+
+  // スクロール無効化
   React.useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -19,14 +21,21 @@ function App() {
     };
   }, []);
 
+  // コンテンツ表示状態
   const [showingContent, setShowingContent] = useState<'portfolio' | 'career' | 'hobby'>('portfolio');
-
   const handleShowingContent = (newValue: 'portfolio' | 'career' | 'hobby') => {
     setShowingContent(newValue);
   };
 
+  // 言語状態（グローバル）
+  const [lang, setLang] = useState<'ja' | 'en'>('ja');
+  const handleLanguageChange = () => {
+    setLang(lang === 'ja' ? 'en' : 'ja');
+  };
+
   return (
     <main className="relative h-screen w-full flex">
+      <Header lang={lang} onChange={handleLanguageChange} />
       {/*ウェルカムメッセージ*/}
       <Welcome />
 
@@ -46,7 +55,7 @@ function App() {
             >
               <div ref={nodeRef} className="w-full h-full flex justify-center items-center">
                 {showingContent === 'portfolio' && <PhotoSlider />}
-                {showingContent === 'hobby'     && <Hobby />}
+                {showingContent === 'hobby'     && <Hobby lang={lang} />}
                 {showingContent === 'career'    && <Career />}
               </div>
             </CSSTransition>
