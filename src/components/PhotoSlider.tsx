@@ -63,7 +63,7 @@ const PhotoSlider: React.FC = () => {
         >
           {/* 前の前の写真 */}
           <div
-            className="relative px-16 grayscale-[70%]
+            className="relative px-[5%] grayscale-[70%]
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
           >
             <Photo
@@ -75,7 +75,7 @@ const PhotoSlider: React.FC = () => {
 
           {/* 前の写真 */}
           <div
-            className={`relative ${moved && direction === -1 ? 'duration-500' : 'px-16 grayscale-[100%]'} 
+            className={`relative ${moved && direction === -1 ? 'duration-500' : 'px-[5%] grayscale-[100%]'} 
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[70%]`}
             onClick={() => {
               setMoved(true);
@@ -91,7 +91,7 @@ const PhotoSlider: React.FC = () => {
 
           {/* 現在の写真 */}
           <div
-            className={`relative ${moved ? 'duration-500 px-16 grayscale-[100%]' : ''} 
+            className={`relative ${moved ? 'duration-500 px-[5%] grayscale-[100%]' : ''} 
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer`}
           >
             <Photo
@@ -103,7 +103,7 @@ const PhotoSlider: React.FC = () => {
 
           {/* 次の写真 */}
           <div
-            className={`relative ${moved && direction === 1 ? 'duration-500' : 'px-16 grayscale-[100%]'} 
+            className={`relative ${moved && direction === 1 ? 'duration-500' : 'px-[5%] grayscale-[100%]'} 
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer hover:grayscale-[70%]`}
             onClick={() => {
               setMoved(true);
@@ -119,7 +119,7 @@ const PhotoSlider: React.FC = () => {
 
           {/* 次の次の写真 */}
           <div
-            className="relative px-16 grayscale-[70%]
+            className="relative px-[5%] grayscale-[70%]
             aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full"
           >
             <Photo
@@ -143,8 +143,8 @@ const PhotoSlider: React.FC = () => {
         <h1
           className="absolute -right-20 bottom-[30vh] lg:bottom-[20vh] bg-opacity-100 text-sky-400 px-4 py-2 rounded text-5xl lg:text-8xl font-bold text-right"
           style={{
-            WebkitTextStroke: '2px white',
-            textShadow: '6px 6px 4px rgba(0, 0, 0, 0.7)',
+            WebkitTextStroke: '1.5px white',
+            textShadow: '4px 4px 0px rgba(0, 0, 0, 0.7)',
           }}
         >
           <span className="text-gray-400 text-7xl">{photos[returnIndex(i + 2, photos.length)].number} </span>
