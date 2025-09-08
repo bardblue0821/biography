@@ -9,6 +9,7 @@ import Welcome from './components/Welcome';
 import Hobby from './components/Hobby';
 import Career from './components/Career';
 import Header from './components/Header';
+import PortfolioContent from './components/PortfolioContent';
 
 function App() {
   const nodeRef = React.useRef<HTMLDivElement>(null);
@@ -21,16 +22,23 @@ function App() {
     };
   }, []);
 
-  // コンテンツ表示状態
+  // 表示するコンテンツ
   const [showingContent, setShowingContent] = useState<'portfolio' | 'career' | 'hobby'>('portfolio');
   const handleShowingContent = (newValue: 'portfolio' | 'career' | 'hobby') => {
     setShowingContent(newValue);
   };
 
-  // 言語状態（グローバル）
+  // 言語
   const [lang, setLang] = useState<'ja' | 'en'>('en');
   const handleLanguageChange = () => {
     setLang(lang === 'ja' ? 'en' : 'ja');
+  };
+
+  // どのポートフォリオの詳細を表示するか
+  type PortfolioType = '' | 'DokoikuVR' | 'SuperTodo' | 'Biography';
+  const [portfolioContent, setPortfolioContent] = useState<PortfolioType>('');
+  const handlePortfolioContent = (newValue: PortfolioType) => {
+    setPortfolioContent(newValue);
   };
 
   return (
@@ -39,7 +47,7 @@ function App() {
       {/*ウェルカムメッセージ*/}
       <Welcome />
 
-      <div className="flex h-full w-full">
+      <div className="flex h-full w-full relateive">
         {/* メニューエリア */}
         <div className="h-full w-1/3 z-50">
           <IconArea onChange={handleShowingContent}/>
@@ -47,19 +55,20 @@ function App() {
         {/* コンテンツエリア */}
         <div className="h-full w-2/3 z-10 flex flex-col justify-center items-center" style={{overflow: 'hidden', position: 'relative'}}>
           <SwitchTransition mode="out-in">
-            <CSSTransition
-              key={showingContent}
-              timeout={300}
-              classNames="slide" /*index.css*/ 
-              nodeRef={nodeRef}
-            >
+            <CSSTransition key={showingContent} timeout={300} classNames="slide" /*index.css*/  nodeRef={nodeRef}>
               <div ref={nodeRef} className="w-full h-full flex justify-center items-center">
-                {showingContent === 'portfolio' && <PhotoSlider />}
+                {showingContent === 'portfolio' && <PhotoSlider onChange={handlePortfolioContent} />}
                 {showingContent === 'hobby'     && <Hobby lang={lang} />}
                 {showingContent === 'career'    && <Career lang={lang} />}
               </div>
             </CSSTransition>
           </SwitchTransition>
+        </div>
+        {/* ポートフォリオコンテンツ モーダル表示 */}
+        <div>
+          {portfolioContent && 
+            <PortfolioContent content={portfolioContent} onChange={handlePortfolioContent} />
+          }
         </div>
       </div>
       <BackgroundImage />

@@ -14,15 +14,19 @@ function returnIndex(index: number, photoLength: number): number {
   return (((index % photoLength) + photoLength) % photoLength);
 }
 
-const PhotoSlider: React.FC = () => {
+type ChildProps = {
+  onChange: (newValue: '' | "DokoikuVR" | "SuperTodo" | "Biography") => void;
+};
+
+const PhotoSlider: React.FC<ChildProps> = ({ onChange }: ChildProps) => {
   const [moved, setMoved] = useState<boolean>(false);
   const [direction, setDirection] = useState<1 | 0 | -1>(0);  // 1: scroll down, -1: scroll up
   const [i, setI] = useState<number>(0);
-  type PhotoType = { src: string; alt: string; number: string; text: string };
+  type PhotoType = { src: string; alt: string; number: string; text: string; };
   const photos: PhotoType[] = [
-    { src: photo1, alt: 'Photo 1', number: '02', text: 'Super Todo' },
-    { src: photo2, alt: 'Photo 2', number: '03', text: 'Biography' },
-    { src: photo3, alt: 'Photo 3', number: '01', text: 'DokoIku VR' },
+    { src: photo1, alt: 'Photo 1', number: '02', text: 'Super Todo'},
+    { src: photo2, alt: 'Photo 2', number: '03', text: 'Biography'},
+    { src: photo3, alt: 'Photo 3', number: '01', text: 'DokoIku VR'},
     //{ src: photo4, alt: 'Photo 4', number: '02', text: 'Super Todo (beta)' },
     //{ src: photo5, alt: 'Photo 5', number: '03', text: 'Biography' },
     //{ src: photo6, alt: 'Photo 6', number: '04', text: 'VRChat' },
@@ -91,8 +95,15 @@ const PhotoSlider: React.FC = () => {
 
           {/* 現在の写真 */}
           <div
-            className={`relative ${moved ? 'duration-500 px-[5%] grayscale-[100%]' : ''} 
-            aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer`}
+          className={`relative ${moved ? 'duration-500 px-[5%] grayscale-[100%]' : ''} 
+          aspect-[3/2] overflow-hidden flex items-center justify-center max-h-[60vh] w-full cursor-pointer`}
+          onClick={() => {
+            const portfolioContent: string = photos[returnIndex(i + 2, photos.length)].text;
+            onChange(portfolioContent === 'DokoIku VR' ? 'DokoikuVR' 
+              : portfolioContent === 'Super Todo' ? 'SuperTodo' 
+              : portfolioContent === 'Biography' ? 'Biography' 
+              : '');
+          }}
           >
             <Photo
               src={photos[returnIndex(i + 2, photos.length)].src}
