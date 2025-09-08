@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const HobbyEng = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-full w-full text-gray-200">
+    <div className="text-gray-200 h-full">
       <h1 className="text-sky-300 xl:text-8xl text-7xl zen-kaku-gothic-new-black">Hobby</h1>
       <h2 className="text-xl mt-2">Smile Together 😊</h2>
       <h2 className="xl:text-5xl text-4xl mt-12 zen-kaku-gothic-new-bold">XR Technology</h2>
@@ -18,7 +18,7 @@ const HobbyEng = () => {
 
 const HobbyJpn = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-full w-full text-gray-200">
+    <div className="text-gray-200 h-full">
       <h1 className="text-sky-300 xl:text-8xl text-7xl zen-kaku-gothic-new-black">趣味</h1>
       <h2 className="text-xl mt-2 zen-kaku-gothic-new-regular">みんなで笑うこと 😊</h2>
       <h2 className="xl:text-5xl text-4xl mt-12 zen-kaku-gothic-new-bold">XR 技術</h2>
@@ -46,8 +46,8 @@ const Hobby: React.FC<{ lang: 'ja' | 'en' }> = ({ lang }) => {
   }, [lang]);
 
   return (
-    <div className="flex items-center h-screen w-full relative">
-      <div className="w-[90%] h-[80%] bg-gray-900 opacity-80 p-10 flex flex-col justify-center items-center overflow-auto scrollbar-hide rounded-xl">
+    <div className="flex items-center h-[95%] w-full relative">
+      <div className="w-[90%] h-[80%] bg-gray-900 bg-opacity-80 p-10  overflow-auto scrollbar-hide rounded-xl">
         <div className={`transition-opacity duration-400 ${fade ? 'opacity-0' : 'opacity-100'} w-full`}>
           {displayLang === 'ja' ? (<HobbyJpn />) : (<HobbyEng />)}
         </div>
