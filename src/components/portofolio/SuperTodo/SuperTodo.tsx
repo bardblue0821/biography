@@ -12,7 +12,7 @@ type HeaderSectionProps = {
   subtitle: string;
 };
 
-const HeaderSection: React.FC<HeaderSectionProps> = ({ link, title, subtitle }) => (
+const HeaderSection: React.FC<HeaderSectionProps> = ({ /*link, */title, subtitle }) => (
   <>
     {/*<a
       href={link}
