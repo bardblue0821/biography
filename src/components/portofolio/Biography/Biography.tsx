@@ -4,9 +4,9 @@ import {
   SiGit,
   SiReact,
   SiTailwindcss,
+  SiTypescript
 } from 'react-icons/si';
 
-// タイトル・サブタイトル部分をコンポーネント化
 type HeaderSectionProps = {
   link: string;
   title: string;
@@ -27,7 +27,6 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ link, title, subtitle }) 
   </>
 );
 
-// VRChat体験共有SNSサイトの説明・課題部分をコンポーネント化
 const DescriptionSection: React.FC = () => (
   <>
     <h2 className="text-3xl zen-kaku-gothic-new-bold">主な機能</h2>
@@ -35,7 +34,7 @@ const DescriptionSection: React.FC = () => (
     <p className="mt-1">説明的 UI を極力削減し、直感的なミニマルデザインを目指しています。</p>
 
     <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">背景（課題・提案）</h2>
-    <p>成果物を作成する上で、そのハブとなるサイトが無かったため、情報が一元集約されたサイトを作成。</p>
+    <p>成果物を公開する上で、そのハブとなるサイトが無かったため、情報が一元集約されたサイトを作成。</p>
     <p>ポートフォリオを中心に自身について知っていただくことを意識。</p>
     <p>目を通していただける方にリラックスしていただけるように、青を基調としたデザインを意識。</p>
 
@@ -64,6 +63,7 @@ const Content: React.FC = () => {
 
       <span className="flex space-x-8 mt-12">
         <SiReact size={60} color="#61DAFB" />
+        <SiTypescript size={60} color="#3178C6" />
         <SiTailwindcss size={60} color="#06B6D4" />
         <SiGit size={60} color="#F1502F" />
       </span>

@@ -6,7 +6,6 @@ import {
   SiTailwindcss,
 } from 'react-icons/si';
 
-// タイトル・サブタイトル部分をコンポーネント化
 type HeaderSectionProps = {
   link: string;
   title: string;
@@ -15,31 +14,32 @@ type HeaderSectionProps = {
 
 const HeaderSection: React.FC<HeaderSectionProps> = ({ link, title, subtitle }) => (
   <>
-    <a
+    {/*<a
       href={link}
       target="_blank"
       rel="noopener noreferrer"
       className="text-6xl text-sky-300 hover:underline"
-    >
+    >*/}
       <h1 className="text-6xl text-sky-300">{title}</h1>
-    </a>
+    {/*</a>*/}
     <h2 className="text-2xl zen-kaku-gothic-new-bold">{subtitle}</h2>
   </>
 );
 
-// VRChat体験共有SNSサイトの説明・課題部分をコンポーネント化
 const DescriptionSection: React.FC = () => (
   <>
     <h2 className="text-3xl zen-kaku-gothic-new-bold">主な機能</h2>
     <ul className="list-disc list-inside mt-2">
-      <li>自己アピールのために<span className="zen-kaku-gothic-new-bold">ポートフォリオ</span>を中心に自己紹介</li>
+      <li><span className="zen-kaku-gothic-new-bold">タスク作成</span></li>
+      <li>タスク分類の <span className="zen-kaku-gothic-new-bold">ラベル作成</span></li>
+      <li><span className="zen-kaku-gothic-new-bold">サブタスク作成</span></li>
     </ul>
-    <p className="mt-1">説明的 UI を極力削減し、直感的なミニマルデザインを目指しています。</p>
+    <p className="mt-1">ミッションクリティカルにするため、ミニマルな GUI を目指しています。</p>
 
-    <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">背景（課題・提案）</h2>
-    <p>成果物を作成する上で、そのハブとなるサイトが無かったため、情報が一元集約されたサイトを作成。</p>
-    <p>ポートフォリオに自信のキャラクターを語らせることを意識。</p>
-    <p>目を通していただける方にリラックスしていただけるように、青を基調としたデザインを意識。</p>
+    <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">背景（課題・提案・今後）</h2>
+    <p>自身がマルチタスクを遂行する上で効果的と感じた経験をもとに開発。</p>
+    <p>タスクを「重要性」「緊急性」の2軸で分類する手法（アイゼンハワー・マトリクス）を簡単に利用可能。</p>
+    <p>モバイル対応や時間軸での可視化を検討中。</p>
 
     <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">技術選定</h2>
     <p>直感的なシングルページサイトにするために、React を選定。</p>
@@ -49,8 +49,8 @@ const DescriptionSection: React.FC = () => (
 
 const Content: React.FC = () => {
   const link = "#";
-  const title = "SuperTodo (in dev)";
-  const subtitle = "アイゼンハワー式タスク管理サイト";
+  const title = "Super Todo (in dev)";
+  const subtitle = "アイゼンハワー式タスク管理アプリ";
 
   return (
     <>

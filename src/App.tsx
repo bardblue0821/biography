@@ -49,7 +49,7 @@ function App() {
 
       <div className="flex h-full w-full relateive">
         {/* メニューエリア */}
-        <div className="h-full w-1/3 z-50">
+        <div className="h-full w-1/3 z-40">
           <IconArea onChange={handleShowingContent}/>
         </div>
         {/* コンテンツエリア */}

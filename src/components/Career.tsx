@@ -71,7 +71,7 @@ const JobDescJpn = () => {
       <h2 className="text-4xl mt-12 zen-kaku-gothic-new-bold">職務内容</h2>
       <ul className="text-xl mt-4 list-disc list-inside zen-kaku-gothic-new-regular">
         <li>半導体試験アプリケーション開発</li>
-        <li>新規製品開発 ／ 新規市場調査</li>
+        <li>新規市場開拓 ／ 新規製品開発</li>
         <li>測定データ解析アプリケーション開発</li>
         <li>工場自動化ソフトウェア運用保守</li>
       </ul>
@@ -81,7 +81,7 @@ const JobDescJpn = () => {
       <h2 className="text-4xl mt-8 zen-kaku-gothic-new-bold">実績</h2>
       <ul className="text-xl mt-4 list-disc list-inside zen-kaku-gothic-new-regular">
         <li>
-          表彰 - 新規市場/新規製品開発 (2023)
+          表彰 - 新規市場開拓 ／ 新規製品開発への貢献 (2023)
         </li>
         <li>
           特許: 非破壊検査法 - 音響信号処理 (2019)

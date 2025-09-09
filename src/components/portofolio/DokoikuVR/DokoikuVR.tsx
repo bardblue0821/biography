@@ -36,10 +36,10 @@ const DescriptionSection: React.FC = () => (
   <>
     <h2 className="text-3xl zen-kaku-gothic-new-bold">主な機能</h2>
     <ul className="list-disc list-inside mt-2">
-      <li>おすすめの VRChat 内の<span className="zen-kaku-gothic-new-bold">ワールドの投稿</span></li>
+      <li>おすすめの VRChat 内の <span className="zen-kaku-gothic-new-bold">ワールドの投稿</span></li>
       <li>投稿に対する「<span className="zen-kaku-gothic-new-bold">お気に入り</span>」「<span className="zen-kaku-gothic-new-bold">後で行きたい</span>」を保存</li>
-      <li><span className="zen-kaku-gothic-new-bold">写真の投稿</span></li>
-      <li>Unity/Blender など<span className="zen-kaku-gothic-new-bold">関連技術ノートの投稿</span>（開発中）</li>
+      <li>VRChat 内で撮影した <span className="zen-kaku-gothic-new-bold">写真の投稿</span></li>
+      <li>Unity/Blender など <span className="zen-kaku-gothic-new-bold">関連技術ノートの投稿 </span>（開発中）</li>
     </ul>
     <p className="mt-1">現在も個人で運営・保守を続けており、投稿数は 200 以上に達しています。</p>
 
@@ -61,7 +61,7 @@ const DescriptionSection: React.FC = () => (
     <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">その他</h2>
     <p>開発手法として、Gitflow を採用。</p>
     <p>あえて Copilot のような生成 AI を使用しないことで、自身の理解を盤石にすることを目指しました。</p>
-    <p>（普段のアプリ開発では積極的に活用しています。）</p>
+    <p>（普段のアプリ開発では特性を活かせる場面で活用しています。）</p>
 
     <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">感謝</h2>
     <p>サイト作成にあたり、多大な協力をくださった友人たちに感謝申し上げます。</p>
