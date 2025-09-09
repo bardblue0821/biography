@@ -1,5 +1,5 @@
 import React from 'react';
-import photoDokoikuVR from '../../../assets/Biography.png';
+import photoBiography from '../../../assets/Biography.png';
 import {
   SiGit,
   SiReact,
@@ -31,14 +31,12 @@ const HeaderSection: React.FC<HeaderSectionProps> = ({ link, title, subtitle }) 
 const DescriptionSection: React.FC = () => (
   <>
     <h2 className="text-3xl zen-kaku-gothic-new-bold">主な機能</h2>
-    <ul className="list-disc list-inside mt-2">
-      <li>自己アピールのために<span className="zen-kaku-gothic-new-bold">ポートフォリオ</span>を中心に自己紹介</li>
-    </ul>
+    <p>セルフプロモーションのために<span className="zen-kaku-gothic-new-bold">ポートフォリオ</span>を中心に自己紹介。</p>
     <p className="mt-1">説明的 UI を極力削減し、直感的なミニマルデザインを目指しています。</p>
 
     <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">背景（課題・提案）</h2>
     <p>成果物を作成する上で、そのハブとなるサイトが無かったため、情報が一元集約されたサイトを作成。</p>
-    <p>ポートフォリオに自信のキャラクターを語らせることを意識。</p>
+    <p>ポートフォリオを中心に自身について知っていただくことを意識。</p>
     <p>目を通していただける方にリラックスしていただけるように、青を基調としたデザインを意識。</p>
 
     <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">技術選定</h2>
@@ -48,9 +46,9 @@ const DescriptionSection: React.FC = () => (
 );
 
 const Content: React.FC = () => {
-  const link = "https://dokoiku-vr.bardblue.com/";
-  const title = "Dokoiku VR";
-  const subtitle = "VRChat 体験共有サイト";
+  const link = "https://bardblue0821.github.io/biography/";
+  const title = "Biography";
+  const subtitle = "自己紹介サイト";
 
   return (
     <>
@@ -59,8 +57,8 @@ const Content: React.FC = () => {
       </div>
 
       <img
-        src={photoDokoikuVR}
-        alt="Dokoiku VR サイトのスクリーンショット"
+        src={photoBiography}
+        alt="Biography サイトのスクリーンショット"
         className="mt-12 rounded-lg w-full max-h-[50vh] object-cover"
       />
 
