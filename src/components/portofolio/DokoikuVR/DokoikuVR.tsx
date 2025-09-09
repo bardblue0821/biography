@@ -41,12 +41,13 @@ const DescriptionSection: React.FC = () => (
       <li><span className="zen-kaku-gothic-new-bold">写真の投稿</span></li>
       <li>Unity/Blender など<span className="zen-kaku-gothic-new-bold">関連技術ノートの投稿</span>（開発中）</li>
     </ul>
-    <p className="mt-1">現在も個人で運営・保守を続けており、投稿数は約200名に達しています。</p>
+    <p className="mt-1">現在も個人で運営・保守を続けており、投稿数は 200 以上に達しています。</p>
 
-    <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">背景（課題・提案）</h2>
+    <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">背景（課題・提案・今後）</h2>
     <p>現状 VRChat での体験共有は X (旧 Twitter) が主流</p>
     <p>VRChat ドメインに特化した機能がないため、ユーザー体験が制限されている</p>
     <p>VRChat ユーザー向けの SNS サイトを作成することで、ユーザー同士のつながりを強化し、より豊かな体験提供を目指す</p>
+    <p>今後、ユーザーからのフィードバックをもとに機能追加や改善を行う計画</p>
 
     <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">技術選定</h2>
     <p>スモールスタート・スケーラブルにするために、Laravel と AWS Lightsail を選定</p>
@@ -56,6 +57,14 @@ const DescriptionSection: React.FC = () => (
       <li><span className="zen-kaku-gothic-new-bold">投稿数</span> 200以上</li>
       <li><span className="zen-kaku-gothic-new-bold">反応数</span> 500程度</li>
     </ul>
+
+    <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">その他</h2>
+    <p>開発手法として、Gitflow を採用。</p>
+    <p>あえて Copilot のような生成 AI を使用しないことで、自身の理解を盤石にすることを目指しました。</p>
+    <p>（普段のアプリ開発では積極的に活用しています。）</p>
+
+    <h2 className="text-3xl zen-kaku-gothic-new-bold mt-12 mb-2">感謝</h2>
+    <p>サイト作成にあたり、多大な協力をくださった友人たちに感謝申し上げます。</p>
 
 
   </>
