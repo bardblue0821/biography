@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Welcome from './components/Welcome';
 import Hobby from './components/Hobby';
 import Career from './components/Career';
+import Book from './components/Book';
 import Header from './components/Header';
 import PortfolioContent from './components/PortfolioContent';
 
@@ -23,8 +24,8 @@ function App() {
   }, []);
 
   // 表示するコンテンツ
-  const [showingContent, setShowingContent] = useState<'portfolio' | 'career' | 'hobby'>('portfolio');
-  const handleShowingContent = (newValue: 'portfolio' | 'career' | 'hobby') => {
+  const [showingContent, setShowingContent] = useState<'portfolio' | 'career' | 'hobby' | 'book'>('portfolio');
+  const handleShowingContent = (newValue: 'portfolio' | 'career' | 'hobby' | 'book') => {
     setShowingContent(newValue);
   };
 
@@ -60,6 +61,7 @@ function App() {
                 {showingContent === 'portfolio' && <PhotoSlider onChange={handlePortfolioContent} />}
                 {showingContent === 'hobby'     && <Hobby lang={lang} />}
                 {showingContent === 'career'    && <Career lang={lang} />}
+                {showingContent === 'book'      && <Book lang={lang} />}
               </div>
             </CSSTransition>
           </SwitchTransition>

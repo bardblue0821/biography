@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import iconImage from '/src/assets/icon.jpg';
 
 type ChildProps = {
-  onChange: (newValue: "portfolio" | "career" | "hobby") => void;
+  onChange: (newValue: "portfolio" | "career" | "hobby" | "book") => void;
 };
 
 const IconArea: React.FC<ChildProps> = ({ onChange }: ChildProps) => {
@@ -55,6 +55,9 @@ const IconArea: React.FC<ChildProps> = ({ onChange }: ChildProps) => {
         </div>
         <div className="font-semibold w-full text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-sky-300 cursor-pointer"> 
           <button onClick={() => onChange('hobby')} className="cursor-pointer"><h1>Hobby</h1></button>
+        </div>
+        <div className="font-semibold w-full text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl transition-colors duration-300 hover:text-sky-300 cursor-pointer"> 
+          <button onClick={() => onChange('book')} className="cursor-pointer"><h1>Book</h1></button>
         </div>
       </div>
     </div>
