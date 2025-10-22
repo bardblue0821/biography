@@ -11,6 +11,9 @@ import {
   SiNextdotjs,
   SiTypescript,
   SiDocker,
+  SiSupabase,
+  SiPrisma,
+  SiVercel,
 } from 'react-icons/si';
 import { FaAws } from 'react-icons/fa';
 
@@ -25,13 +28,18 @@ const Icons = () => {
         <span><SiMysql size={56} color="#4479A1" /></span>
         <span><SiGit size={40} color="#F1502F" /></span>
       </div>
-      <div className="mt-2 flex space-x-4 justify-center items-center">
+      <div className="mt-4 flex space-x-4 justify-center items-center">
         <span><SiReact size={40} color="#61DAFB" /></span>
         <span><SiNextdotjs size={40} color="#868686" /></span>
         <span><SiTailwindcss size={40} color="#06B6D4" /></span>
         <span><SiTypescript size={40} color="#3178C6" /></span>
         <span><SiDocker size={40} color="#2496ED" /></span>
         <span><FaAws size={40} color="#FF9900" /></span>
+      </div>
+      <div className="mt-4 flex space-x-4 justify-center items-center">
+        <span><SiSupabase size={40} color="#3ECF8E" /></span>
+        <span><SiPrisma size={40} color="#758eb9" /></span>
+        <span><SiVercel size={40} color="#cccccc" /></span>
       </div>
     </div>
   )
@@ -67,7 +75,7 @@ const JobDescEng = () => {
 const JobDescJpn = () => {
   return (
     <div className="text-gray-200 h-full">
-      <h1 className="text-sky-300 text-7xl zen-kaku-gothic-new-black tracking-[-0.20em]">職務経歴</h1>
+      <h1 className="text-sky-300 text-7xl zen-kaku-gothic-new-black tracking-[-0.20em]">経歴</h1>
       <h2 className="text-4xl mt-12 zen-kaku-gothic-new-bold">職務内容</h2>
       <ul className="text-xl mt-4 list-disc list-inside zen-kaku-gothic-new-regular">
         <li>半導体試験アプリケーション開発</li>
